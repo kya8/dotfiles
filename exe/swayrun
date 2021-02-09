@@ -1,0 +1,19 @@
+#!/bin/sh
+
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=sway
+export XDG_CURRENT_DESKTOP=sway
+
+# use qt platform theme from plasma
+export QT_QPA_PLATFORMTHEME=kde
+
+# toolkit/app
+export MOZ_ENABLE_WAYLAND=1
+
+
+# redir output to a file
+errfile=~/.swaylog
+exec > "$errfile" 2>&1
+
+# start Sway, with args
+exec sway $@
