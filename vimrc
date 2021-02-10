@@ -19,7 +19,7 @@ inoremap jk <ESC>
 "let mapleader = " "
 
 " Clear higlighting
-nnoremap \\ :noh<cr> 
+nnoremap \\ :noh<cr><esc>
 
 " toggle list visuals
 nmap <leader>l :set list!<CR>
