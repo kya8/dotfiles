@@ -233,7 +233,7 @@ include /etc/sway/config.d/*
 ######## CUSTOM SECTION
 # TODO: idle & lock, waybar
 
-seat * xcursor_theme breeze_cursors
+#seat * xcursor_theme breeze_cursors
 
 #default_border pixel 2
 # use criteria for chrome,vscode & firefox to hide their titlebar (or use border csd)
