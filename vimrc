@@ -2,7 +2,8 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 
 Plug 'plasticboy/vim-markdown'
 
@@ -55,6 +56,10 @@ set splitbelow
 
 " always show the status line
 set laststatus=2
+" mode is shown in statusline
+set noshowmode
+" display search counters
+set shortmess-=S
 
 " never, ever beep
 set belloff=all
