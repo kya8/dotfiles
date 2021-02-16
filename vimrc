@@ -33,6 +33,8 @@ set clipboard=unnamedplus
 set number
 set mouse=a
 
+set ttimeoutlen=50
+
 set scrolloff=0
 
 " 80-col line
