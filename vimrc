@@ -33,7 +33,7 @@ set clipboard=unnamedplus
 set number
 set mouse=a
 
-set ttimeoutlen=50
+set timeout timeoutlen=1000 ttimeoutlen=50
 
 set scrolloff=0
 
@@ -65,6 +65,8 @@ set shortmess-=S
 
 " never, ever beep
 set belloff=all
+
+set bs=indent,eol,start
 
 " colors
 set t_Co=256
