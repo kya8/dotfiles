@@ -5,6 +5,11 @@ Plug 'tpope/vim-surround'
 "Plug 'vim-airline/vim-airline'
 Plug 'itchyny/lightline.vim'
 
+" Use external plugin if lacking native support for match counters
+if !has("patch-8.1-1270")
+  Plug 'google/vim-searchindex'
+endif
+
 Plug 'plasticboy/vim-markdown'
 
 Plug 'morhetz/gruvbox'
