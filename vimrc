@@ -31,6 +31,9 @@ nnoremap \\ :noh<cr>
 nmap <leader>l :set list!<CR>
 set listchars=tab:▸\ ,eol:¬,space:.
 
+" Ex mode is retarded
+nnoremap Q <Nop>
+
 filetype plugin indent on
 syntax enable
 set encoding=utf-8
