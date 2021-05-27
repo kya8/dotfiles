@@ -46,8 +46,10 @@ set timeout timeoutlen=1000 ttimeoutlen=50
 set scrolloff=0
 
 " 80-col line
-"set cc=80
-"set nowrap
+set cc=80
+set nowrap
+"set textwidth=80
+"set ruler
 
 " indentation with spaces
 set expandtab
