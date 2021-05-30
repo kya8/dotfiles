@@ -113,6 +113,7 @@ bindkey "\e[3~" delete-char
 
 
 ##### alias
+(( ${+aliases[ls]} )) || alias ls="ls --color=auto"
 alias l="ls -Alh"
 alias d="dirs -v"
 alias ..="cd .."
