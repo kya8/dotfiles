@@ -88,6 +88,9 @@ bindkey -e
 # "\e[" is a CSI(Control Sequence Indicator)
 # https://en.wikipedia.org/wiki/ANSI_escape_code
 
+# unlike bash, ctrl-u will delete whole line by default in zsh
+bindkey "^U" backward-kill-line
+
 # Page Up/Down context search
 bindkey "\e[5~" history-beginning-search-backward
 bindkey "\e[6~" history-beginning-search-forward
