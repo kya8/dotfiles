@@ -139,3 +139,8 @@ _zsh_autosuggestions_path="${_zsh_plugin_dir}/\
 zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 [ -r "${_zsh_autosuggestions_path}" ] && source "${_zsh_autosuggestions_path}"
+
+
+##### Site-specific config #####
+_zshrc_local_config="${HOME}/.zshrc_local"
+[ -r "${_zshrc_local_config}" ] && source "${_zshrc_local_config}"
