@@ -143,4 +143,4 @@ zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 ##### Site-specific config #####
 _zshrc_local_config="${HOME}/.zshrc_local"
-[ -r "${_zshrc_local_config}" ] && source "${_zshrc_local_config}"
+[ -r "${_zshrc_local_config}" ] && source "${_zshrc_local_config}" || :
