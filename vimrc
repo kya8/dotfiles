@@ -89,3 +89,11 @@ set bg=dark
 let g:gruvbox_italic = '1'
 let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
+
+" highlight trailing spaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+let w:m1 = matchadd('ExtraWhitespace', '\s\+$')
+"nnoremap <Leader>wf :call matchdelete(w:m1)<cr>
+
+"nnoremap <Leader>wn :match ExtraWhitespace /\s\+$/<cr>
+"nnoremap <Leader>wf :match<CR>
