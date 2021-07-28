@@ -97,3 +97,10 @@ let w:m1 = matchadd('ExtraWhitespace', '\s\+\%#\@<!$')
 
 "nnoremap <Leader>wn :match ExtraWhitespace /\s\+\%#\@<!$/<cr>
 "nnoremap <Leader>wf :match<CR>
+
+
+" Plugin config
+
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ }
