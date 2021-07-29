@@ -31,6 +31,9 @@ nnoremap \\ :noh<cr>
 nmap <leader>l :set list!<CR>
 set listchars=tab:▸\ ,eol:¬,space:.
 
+" toggle paste mode
+nnoremap <leader>p :set paste!<cr>
+
 " Ex mode is retarded
 nnoremap Q <Nop>
 
