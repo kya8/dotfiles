@@ -81,6 +81,8 @@ set belloff=all
 
 set bs=indent,eol,start
 
+set wildmenu
+
 " colors
 set t_Co=256
 set termguicolors
