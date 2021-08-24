@@ -83,6 +83,9 @@ set bs=indent,eol,start
 
 set wildmenu
 
+" Use hidden buffers
+set hidden
+
 " colors
 set t_Co=256
 set termguicolors
