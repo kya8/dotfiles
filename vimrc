@@ -10,6 +10,8 @@ if !has("patch-8.1-1270")
   Plug 'google/vim-searchindex'
 endif
 
+Plug 'cespare/vim-toml'
+
 Plug 'plasticboy/vim-markdown'
 
 Plug 'morhetz/gruvbox'
@@ -51,7 +53,7 @@ set scrolloff=0
 " 80-col line
 set cc=80
 set nowrap
-"set textwidth=80
+set textwidth=80
 "set ruler
 
 " indentation with spaces
@@ -86,6 +88,8 @@ set wildmenu
 " Use hidden buffers
 set hidden
 
+set noswapfile
+
 " colors
 set t_Co=256
 set termguicolors
@@ -112,3 +116,7 @@ let w:m1 = matchadd('ExtraWhitespace', '\s\+\%#\@<!$')
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ }
+
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_toml_frontmatter = 1
+set nofoldenable  "start with no folds
