@@ -1,6 +1,8 @@
 " vim-plug section
 call plug#begin('~/.vim/plugged')
 
+Plug 'tpope/vim-commentary'
+
 Plug 'tpope/vim-surround'
 "Plug 'vim-airline/vim-airline'
 Plug 'itchyny/lightline.vim'
