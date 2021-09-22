@@ -66,6 +66,9 @@ SAVEHIST=5000
 ## never ever beep ever
 setopt NO_BEEP
 
+## do not push dir on cd
+unsetopt AUTO_PUSHD
+
 ## automatically decide when to page a list of completions
 #LISTMAX=0
 
