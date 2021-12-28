@@ -229,6 +229,7 @@ bar {
 
 include /etc/sway/config.d/*
 
+include config.d/*
 
 ######## CUSTOM SECTION
 # TODO: waybar
@@ -269,8 +270,6 @@ bindsym $mod+Shift+tab workspace prev_on_output
 
 exec xrdb -merge ~/.Xresources
 
-exec kwalletd5
-#exec gnome-keyring-daemon -s -c secrets
 
 exec mako
 
