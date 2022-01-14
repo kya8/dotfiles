@@ -13,12 +13,12 @@ promptinit
 # _newline=$'\n'
 
 # notes on colors:
-# The %F{}%f colour should be set to colour, a decimal integer, the name of 
-# one of the eight most widely-supported colours or as a ‘#’ followed by an RGB 
+# The %F{}%f colour should be set to colour, a decimal integer, the name of
+# one of the eight most widely-supported colours or as a ‘#’ followed by an RGB
 # triplet in hexadecimal format.
 # or use plain escape sequence \033[...m
 
-# custom prompt 
+# custom prompt
 #PS1='
 #%F{blue}%n%F{cyan}@%f%m : %B%F{blue}%(5~!.../!)%4~%f%b : %(1j.%B%F{magenta}%j%f%b : .)%B%*%b
 #%B%(?..[%F{red}%?%f] )%b%B%F{160}>%F{166}>%F{172}>%f%b '
@@ -104,7 +104,7 @@ bindkey "\e[B" down-line-or-history
 
 # word navigation : ctrl + left/right
 bindkey '\e[1;5C' forward-word
-bindkey '\e[1;5D' backward-word 
+bindkey '\e[1;5D' backward-word
 
 # DEL key
 bindkey "\e[3~" delete-char
