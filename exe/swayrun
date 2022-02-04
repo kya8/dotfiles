@@ -16,4 +16,4 @@ errfile=~/.swaylog
 exec > "$errfile" 2>&1
 
 # start Sway, with args
-exec sway $@
+exec sway "$@"
