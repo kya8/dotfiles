@@ -260,13 +260,13 @@ bindsym $mod+Shift+tab workspace prev_on_output
 
 ### start-up programs
 
-# import env vars to systemd user services and dbus services, so apps depending
-# on dbus/systemd services will work correctly.
-# see github.com/swaywm/sway/issues/5732
+# github.com/swaywm/sway/issues/5732
 # BE CAREFUL, this can break same-user multi-sessions
-# exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-# exec hash dbus-update-activation-environment 2>/dev/null && \
-#      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+#
+#exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+#exec hash dbus-update-activation-environment 2>/dev/null && \
+#     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+
 
 exec xrdb -merge ~/.Xresources
 
