@@ -17,6 +17,8 @@ Plug 'cespare/vim-toml'
 Plug 'plasticboy/vim-markdown'
 
 Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'sainnhe/sonokai'
 
 call plug#end()
 
@@ -102,7 +104,10 @@ set bg=dark
 
 let g:gruvbox_italic = '1'
 let g:gruvbox_contrast_dark = 'hard'
-colorscheme gruvbox
+"colorscheme gruvbox
+let g:sonokai_style = 'atlantis'
+let g:sonokai_better_performance = 1
+colorscheme sonokai
 
 " highlight trailing spaces
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -116,7 +121,7 @@ let w:m1 = matchadd('ExtraWhitespace', '\s\+\%#\@<!$')
 " Plugin config
 
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'sonokai',
       \ }
 
 let g:vim_markdown_frontmatter = 1
