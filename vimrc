@@ -35,7 +35,12 @@ nnoremap \\ :noh<cr>
 
 " toggle list visuals
 nmap <leader>l :set list!<CR>
-set listchars=tab:▸\ ,eol:¬,space:.
+set listchars=tab:▸\ ,eol:¬,space:.,trail:-,extends:>,precedes:<,nbsp:+
+
+" Delete comment character when joining commented lines.
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j
+endif
 
 " toggle paste mode
 nnoremap <leader>p :set paste!<cr>
