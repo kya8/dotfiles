@@ -53,6 +53,8 @@ syntax enable
 set encoding=utf-8
 set clipboard=unnamedplus
 set number
+set relativenumber
+nnoremap <leader>r :set rnu!<cr>
 set mouse=a
 
 set timeout timeoutlen=1000 ttimeoutlen=50
