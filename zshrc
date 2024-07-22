@@ -125,6 +125,8 @@ alias d="dirs -v"
 alias ..="cd .."
 alias ...="cd ../.."
 
+alias rmall="rm *(D)" # glob_dots
+
 # plugin dir
 _zsh_plugin_dir="${HOME}/.zsh_plugins"
 
