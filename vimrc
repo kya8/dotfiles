@@ -8,7 +8,7 @@ Plug 'tpope/vim-surround'
 Plug 'itchyny/lightline.vim'
 
 " Use external plugin if lacking native support for match counters
-if !has("patch-8.1-1270")
+if !has('patch-8.1.1270') && !has('nvim-0.4.0')
   Plug 'google/vim-searchindex'
 endif
 
@@ -38,7 +38,7 @@ nmap <leader>l :set list!<CR>
 set listchars=tab:▸\ ,eol:¬,space:.,trail:-,extends:>,precedes:<,nbsp:+
 
 " Delete comment character when joining commented lines.
-if v:version > 703 || v:version == 703 && has("patch541")
+if v:version > 703 || v:version == 703 && has('patch541')
   set formatoptions+=j
 endif
 
