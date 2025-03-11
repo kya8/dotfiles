@@ -1,0 +1,13 @@
+[alias]
+    co = checkout
+    st = status
+    br = branch
+    cm = commit
+    sw = switch
+    rb = rebase
+    re = reset
+    rs = restore
+    mg = merge
+    fe = fetch
+    pl = pull
+    ps = push
