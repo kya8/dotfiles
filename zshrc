@@ -117,6 +117,8 @@ bindkey "\e[3~" delete-char
 
 # TODO: Add Linux Console keys. man 4 console_codes
 
+# Ignore ctrl-S
+stty -ixon
 
 ##### alias
 (( ${+aliases[ls]} )) || alias ls="ls --color=auto"
