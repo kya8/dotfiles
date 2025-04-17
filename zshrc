@@ -58,7 +58,7 @@ setopt EXTENDED_HISTORY
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 
-HISTFILE=~/.zhistory
+HISTFILE=~/.zsh_history
 HISTSIZE=5000
 SAVEHIST=10000
 
@@ -119,6 +119,10 @@ bindkey "\e[3~" delete-char
 
 # Ignore ctrl-S
 stty -ixon
+
+if [[ $OSTYPE == darwin* ]]; then
+export COLORTERM=1
+fi
 
 ##### alias
 (( ${+aliases[ls]} )) || alias ls="ls --color=auto"
