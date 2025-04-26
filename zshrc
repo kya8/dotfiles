@@ -24,7 +24,8 @@ promptinit
 #%B%(?..[%F{red}%?%f] )%b%B%F{160}>%F{166}>%F{172}>%f%b '
 # right aligning text in PS1 is hacky.
 
-PS1='%B%(?..%F{red}%?%f)%b%(1j.%B%F{magenta}J%j%f%b.)[%*]%n%F{cyan}@%f%m %F{blue}%(5~!.../!)%4~%f$ '
+PS1='%F{205}┌%f%B%(?..%F{red}%?%f)%b%(1j.%B%F{magenta}J%j%f%b.)[%*]%n%F{cyan}@%f%m %F{blue}%(5~!.../!)%4~%f
+%F{205}└%f%(!.%F{214}#%f.$) '
 
 #autoload bashcompinit
 #bashcompinit
