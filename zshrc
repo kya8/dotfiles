@@ -66,6 +66,8 @@ SAVEHIST=10000
 ## never ever beep ever
 setopt NO_BEEP
 
+setopt RM_STAR_SILENT
+
 ## do not push dir on cd
 unsetopt AUTO_PUSHD
 
