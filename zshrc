@@ -82,42 +82,49 @@ unsetopt AUTO_PUSHD
 
 ###### KEY BINDINGS ######
 
+# zkbd-compatible aliases
+typeset -g -A key
+key[Home]="${terminfo[khome]}"
+key[End]="${terminfo[kend]}"
+key[Insert]="${terminfo[kich1]}"
+key[Backspace]="${terminfo[kbs]}"
+key[Delete]="${terminfo[kdch1]}"
+key[Up]="${terminfo[kcuu1]}"
+key[Down]="${terminfo[kcud1]}"
+key[Left]="${terminfo[kcub1]}"
+key[Right]="${terminfo[kcuf1]}"
+key[Control-Left]="${terminfo[kLFT5]}"
+key[Control-Right]="${terminfo[kRIT5]}"
+key[PageUp]="${terminfo[kpp]}"
+key[PageDown]="${terminfo[knp]}"
+key[Shift-Tab]="${terminfo[kcbt]}"
+
 # use emacs key bindings. this is the default
 bindkey -e
-
-# use terminfo keycodes... or not.
-
-# Notes: octal ANSI \033 should work for all platforms.
-# \e or \x1b or ^[ might not work on some platforms. \e doesn't work in macOS.
-
-# "\e[" is a CSI(Control Sequence Indicator)
-# https://en.wikipedia.org/wiki/ANSI_escape_code
 
 # unlike bash, ctrl-u will delete whole line by default in zsh
 bindkey "^U" backward-kill-line
 
 # Page Up/Down context search
-bindkey "\e[5~" history-beginning-search-backward
-bindkey "\e[6~" history-beginning-search-forward
+bindkey "${key[PageUp]}" history-beginning-search-backward
+bindkey "${key[PageDown]}" history-beginning-search-forward
 
 # Up/Down arrow history
-bindkey "\e[A" up-line-or-history
-bindkey "\e[B" down-line-or-history
+bindkey "${key[Up]}" up-line-or-history
+bindkey "${key[Down]}" down-line-or-history
 
 # word navigation : ctrl + left/right
-bindkey '\e[1;5C' forward-word
-bindkey '\e[1;5D' backward-word
+bindkey "${key[Control-Right]}" forward-word
+bindkey "${key[Control-Left]}" backward-word
 
 # DEL key
-bindkey "\e[3~" delete-char
+bindkey "${key[Delete]}" delete-char
 
 # [Shift-Tab] - move through the completion menu backwards
-# bindkey "${terminfo[kcbt]}" reverse-menu-complete
+# bindkey "${key[Shift-Tab]}" reverse-menu-complete
 
 # [Space] - do history expansion
 # bindkey ' ' magic-space
-
-# TODO: Add Linux Console keys. man 4 console_codes
 
 # Ignore ctrl-S
 stty -ixon
