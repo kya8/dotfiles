@@ -71,6 +71,8 @@ setopt RM_STAR_SILENT
 ## do not push dir on cd
 unsetopt AUTO_PUSHD
 
+setopt autocd
+
 ## automatically decide when to page a list of completions
 #LISTMAX=0
 
@@ -137,7 +139,6 @@ fi
 (( ${+aliases[ls]} )) || alias ls="ls --color=auto"
 alias l="ls -Alh"
 alias d="dirs -v"
-alias ..="cd .."
 alias ...="cd ../.."
 
 
