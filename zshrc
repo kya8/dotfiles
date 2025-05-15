@@ -1,4 +1,4 @@
-# taocris's zshrc
+# My zshrc
 
 
 autoload -Uz compinit promptinit
@@ -24,7 +24,7 @@ promptinit
 #%B%(?..[%F{red}%?%f] )%b%B%F{160}>%F{166}>%F{172}>%f%b '
 # right aligning text in PS1 is hacky.
 
-PS1='%B%(?..%F{red}%?%f)%b%K{#444444}%(1j.%B%F{magenta}J%j%f%b.)%B%F{195}[%*]%f%b%n%F{#75b5aa}@%f%m %F{#6a9fb5}%(5~!.../!)%4~%f%k%(!.%F{214}%f.%F{#444444}%f) '
+PS1='%B%(?..%F{red}%?%f)%b%K{#444444}%(1j.%B%F{magenta}J%j%f%b.)%F{195}[%*]%f%n%F{#75b5aa}@%f%m %F{#6a9fb5}%(5~!.../!)%4~%f%k%(!.%F{214}%f.%F{#444444}%f) '
 
 #autoload bashcompinit
 #bashcompinit
@@ -95,8 +95,8 @@ key[Up]="${terminfo[kcuu1]}"
 key[Down]="${terminfo[kcud1]}"
 key[Left]="${terminfo[kcub1]}"
 key[Right]="${terminfo[kcuf1]}"
-key[Control-Left]="${terminfo[kLFT5]}"
-key[Control-Right]="${terminfo[kRIT5]}"
+#key[Control-Left]="${terminfo[kLFT5]}"
+#key[Control-Right]="${terminfo[kRIT5]}"
 key[PageUp]="${terminfo[kpp]}"
 key[PageDown]="${terminfo[knp]}"
 key[Shift-Tab]="${terminfo[kcbt]}"
@@ -116,14 +116,14 @@ bindkey "${key[Up]}" up-line-or-history
 bindkey "${key[Down]}" down-line-or-history
 
 # word navigation : ctrl + left/right
-bindkey "${key[Control-Right]}" forward-word
-bindkey "${key[Control-Left]}" backward-word
+bindkey '\033[1;5C' forward-word
+bindkey '\033[1;5D' backward-word
 
 # DEL key
 bindkey "${key[Delete]}" delete-char
 
 # [Shift-Tab] - move through the completion menu backwards
-# bindkey "${key[Shift-Tab]}" reverse-menu-complete
+bindkey "${key[Shift-Tab]}" reverse-menu-complete
 
 # [Space] - do history expansion
 # bindkey ' ' magic-space
@@ -140,6 +140,15 @@ fi
 alias l="ls -Alh"
 alias d="dirs -v"
 alias ...="cd ../.."
+
+##### Functions
+mcd() {
+  if [ $# -eq 0 ]; then
+    echo "Usage: mcd <directory>"
+    return 1
+  fi
+  mkdir -p -- "$1" && cd -- "$1"
+}
 
 
 # plugin dir
