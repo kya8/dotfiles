@@ -142,9 +142,9 @@ alias d="dirs -v"
 alias ...="cd ../.."
 
 ##### Functions
-mcd() {
+mkcd() {
   if [ $# -eq 0 ]; then
-    echo "Usage: mcd <directory>"
+    echo "Usage: mkcd <directory>"
     return 1
   fi
   mkdir -p -- "$1" && cd -- "$1"
