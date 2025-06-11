@@ -150,6 +150,11 @@ mkcd() {
   mkdir -p -- "$1" && cd -- "$1"
 }
 
+# Path
+if [ -r ${HOME}/.cargo/env ]; then
+  source ${HOME}/.cargo/env
+fi
+
 
 # plugin dir
 _zsh_plugin_dir="${HOME}/.zsh_plugins"
