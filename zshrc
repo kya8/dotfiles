@@ -24,7 +24,13 @@ promptinit
 #%B%(?..[%F{red}%?%f] )%b%B%F{160}>%F{166}>%F{172}>%f%b '
 # right aligning text in PS1 is hacky.
 
-PS1='%B%(?..%F{red}%?%f)%b%K{#444444}%(1j.%B%F{magenta}J%j%f%b.)%F{195}[%*]%f%n%F{#75b5aa}@%f%m %F{#6a9fb5}%(5~!.../!)%4~%f%k%(!.%F{214}%f.%F{#444444}%f) '
+if [[ -n $SSH_CONNECTION ]]; then
+  ps1_ssh_indicator="%F{214} %f"
+else
+  ps1_ssh_indicator=""
+fi
+
+PS1="%B%(?..%F{red}%?%f)%b%K{#444444}%(1j.%B%F{207}J%j%f%b.)${ps1_ssh_indicator}%F{195}[%*]%f%n%F{#75b5aa}@%f%m %F{#6a9fb5}%(5~!.../!)%4~%f%k%(!.%F{214}%f.%F{#444444}%f) "
 
 #autoload bashcompinit
 #bashcompinit
