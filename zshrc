@@ -141,6 +141,11 @@ if [[ $OSTYPE == darwin* ]]; then
 export COLORTERM=1
 fi
 
+# Set-up ls colors
+if [ -z ${LS_COLORS} ]; then
+  test -r ~/.dir_colors && eval "$(dircolors -b ~/.dir_colors)" || eval "$(dircolors -b)"
+fi
+
 ##### alias
 (( ${+aliases[ls]} )) || alias ls="ls --color=auto"
 alias l="ls -Alh"
