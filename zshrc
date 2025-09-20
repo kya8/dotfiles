@@ -161,8 +161,8 @@ mkcd() {
   mkdir -p -- "$1" && cd -- "$1"
 }
 
-# Path
-if [ -r ${HOME}/.cargo/env ]; then
+# Rustup. Activate only if there isn't another active rust installation.
+if (( ! $+commands[cargo] )) && [ -r ${HOME}/.cargo/env ]; then
   source ${HOME}/.cargo/env
 fi
 
