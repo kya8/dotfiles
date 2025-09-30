@@ -152,6 +152,9 @@ alias l="ls -Alh"
 alias d="dirs -v"
 alias ...="cd ../.."
 
+# Remove `which' alias
+(( ${+aliases[which]} )) && unalias which
+
 ##### Functions
 mkcd() {
   if [ $# -eq 0 ]; then
@@ -185,7 +188,12 @@ zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 [ -r "${_zsh_autosuggestions_path}" ] && source "${_zsh_autosuggestions_path}"
 
-
 ##### Site-specific config #####
-_zshrc_local_config="${HOME}/.zshrc_local"
-[ -r "${_zshrc_local_config}" ] && source "${_zshrc_local_config}" || :
+if [ -d ~/.zshrc.d ]; then
+    for rc in ~/.zshrc.d/*; do
+        if [ -f "$rc" ]; then
+            . "$rc"
+        fi
+    done
+fi
+unset rc
