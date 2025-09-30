@@ -171,16 +171,13 @@ fi
 
 
 # plugin dir
-_zsh_plugin_dir="${HOME}/.zsh_plugins"
+_zsh_plugin_dir="${HOME}/.zsh/plugins"
 
 # syntax highlighting
 _zsh_syntax_hl_path="${_zsh_plugin_dir}/\
 fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 
-if [ -r "${_zsh_syntax_hl_path}" ]
-then
-  source "${_zsh_syntax_hl_path}"
-fi
+[ -r "${_zsh_syntax_hl_path}" ] && source "${_zsh_syntax_hl_path}"
 
 # auto suggestions
 _zsh_autosuggestions_path="${_zsh_plugin_dir}/\
@@ -189,8 +186,8 @@ zsh-autosuggestions/zsh-autosuggestions.zsh"
 [ -r "${_zsh_autosuggestions_path}" ] && source "${_zsh_autosuggestions_path}"
 
 ##### Site-specific config #####
-if [ -d ~/.zshrc.d ]; then
-    for rc in ~/.zshrc.d/*; do
+if [ -d ~/.zsh/rc.d ]; then
+    for rc in ~/.zsh/rc.d/*; do
         if [ -f "$rc" ]; then
             . "$rc"
         fi
