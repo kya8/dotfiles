@@ -151,6 +151,7 @@ fi
 alias l="ls -Alh"
 alias d="dirs -v"
 alias ...="cd ../.."
+alias o="less -i"
 
 # Remove `which' alias
 (( ${+aliases[which]} )) && unalias which
