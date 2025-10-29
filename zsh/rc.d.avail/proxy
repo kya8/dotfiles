@@ -1,0 +1,14 @@
+proxy_set() {
+    export all_proxy=http://127.0.0.1:1080 http_proxy=http://127.0.0.1:1080 https_proxy=http://127.0.0.1:1080
+}
+
+proxy_unset() {
+    unset all_proxy
+    unset http_proxy
+    unset https_proxy
+    unset ALL_PROXY
+    unset HTTP_PROXY
+    unset HTTPS_PROXY
+}
+
+proxy_set

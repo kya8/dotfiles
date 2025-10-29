@@ -158,7 +158,7 @@ alias o="less -i"
 
 ##### Functions
 mkcd() {
-  if [ $# -eq 0 ]; then
+  if [ $# -ne 1 ]; then
     echo "Usage: mkcd <directory>"
     return 1
   fi
@@ -187,11 +187,15 @@ zsh-autosuggestions/zsh-autosuggestions.zsh"
 [ -r "${_zsh_autosuggestions_path}" ] && source "${_zsh_autosuggestions_path}"
 
 ##### Site-specific config #####
-if [ -d ~/.zsh/rc.d ]; then
-    for rc in ~/.zsh/rc.d/*; do
+source_files_in_dir() {
+local rc
+if [ -d "$1" ]; then
+    for rc in "$1"/*(N); do
         if [ -f "$rc" ]; then
             . "$rc"
         fi
     done
 fi
-unset rc
+}
+source_files_in_dir ~/.zsh/rc.d
+source_files_in_dir ~/.zsh/rc.d.local
