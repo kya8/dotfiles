@@ -1,0 +1,8 @@
+[user]
+	name = kya
+	email = <>
+[credential "https://github.com"]
+	username = kya8
+
+[include]
+	path = ~/.dotfiles/git/alias
