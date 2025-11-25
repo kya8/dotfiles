@@ -30,7 +30,9 @@ echo "OS type: ${os_type}"
 
 dotfiles=${dotfiles:-~/.dotfiles}
 
-ln -sT "${dotfiles}/zsh" "${HOME}/.zsh" ||:
+if [ ! -e "${HOME}/.zsh" ]; then
+ln -s "${dotfiles}/zsh" "${HOME}/.zsh" ||:
+fi
 ln -s ".zsh/zshrc" "${HOME}/.zshrc" ||:
 ln -s "${dotfiles}/vimrc" "${HOME}/.vimrc" ||:
 
