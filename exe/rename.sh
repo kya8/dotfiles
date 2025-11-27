@@ -11,7 +11,7 @@ for file in "$@"; do
     # 2. Get the file's modification time
     # Format: YYMMDD-hhmmss
     # logic: date -r reads the file's time, +format formats the output string
-    timestamp=$(date -r "$file" "+%y%m%d-%H%M%S")
+    timestamp=$(date -r "$file" "+%Y%m%d-%H%M%S")
 
     # 3. Extract parts of the path
     dir=$(dirname "$file")
