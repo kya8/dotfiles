@@ -152,7 +152,17 @@ alias ...="cd ../.."
 # alias o="less -i"
 
 if [[ $OSTYPE == linux* ]]; then
-alias o=xdg-open
+case "${XDG_CURRENT_DESKTOP}" in
+    *GNOME*)
+        alias o="gio open"
+        ;;
+    KDE*)
+        alias o=kde-open
+        ;;
+    *)
+        alias o=xdg-open
+        ;;
+esac
 elif [[ $OSTYPE == darwin* ]]; then
 alias o=open
 fi
