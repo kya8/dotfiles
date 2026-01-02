@@ -26,16 +26,17 @@ case "${os_type}" in
         ;;
 esac
 
-echo "OS type: ${os_type}"
+echo "--- OS type: ${os_type}"
 
 dotfiles=$(git -C "$(dirname -- "$0")" rev-parse --show-toplevel)
-echo "Using dotfiles repo: ${dotfiles}"
+echo "--- Using dotfiles repo: ${dotfiles}"
 
 my_link() {
     if [ -e "$2" ]; then
         echo "$2 already exists. Skipping."
         return 0
     else
+        echo "Linking $2 -> $1"
         ln -s "$1" "$2"
     fi
 }
@@ -61,15 +62,13 @@ link_dir() {
     done
 }
 
-if [ ! -e "${HOME}/.zsh" ]; then
-ln -s "${dotfiles}/zsh" "${HOME}/.zsh" ||:
-fi
-ln -s ".zsh/zshrc" "${HOME}/.zshrc" ||:
-ln -s "${dotfiles}/vimrc" "${HOME}/.vimrc" ||:
+my_link "${dotfiles}/zsh" "${HOME}/.zsh"
+my_link ".zsh/zshrc" "${HOME}/.zshrc"
+my_link "${dotfiles}/vimrc" "${HOME}/.vimrc"
 
 config_dir=${XDG_CONFIG_HOME:-${HOME}/.config}
 mkdir -p "$config_dir"
 
 link_dir "${dotfiles}/xdg/config" "$config_dir"
 
-echo "Setup done."
+echo "--- Setup done!"
