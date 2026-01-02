@@ -3,8 +3,6 @@
 	email = <>
 [credential "https://github.com"]
 	username = kya8
-[credential]
-	helper = libsecret
 
 [include]
-	path = ~/.dotfiles/git/alias
+	path = ~/.dotfiles/common/git-alias
