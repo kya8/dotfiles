@@ -22,7 +22,7 @@ case "${os_type}" in
 #         ;;
     *)
         echo "Unknown OS"
-        return 1
+        exit 1
         ;;
 esac
 
