@@ -37,7 +37,7 @@ my_link() {
         return 0
     else
         echo "Linking $2 -> $1"
-        ln -s "$1" "$2"
+        ln -sf "$1" "$2" # -e returns false for dangling symlinks, overwrite them with -f
     fi
 }
 
@@ -45,6 +45,7 @@ supported_os="linux macos freebsd"
 
 link_dir() {
     for src in "$1"/*; do
+        [ -e "$src" ] || continue # Prevent unexpanded *
         pkg="${src##*/}"
         skip=0
         for os in ${supported_os}; do
@@ -68,7 +69,8 @@ my_link "${dotfiles}/vimrc" "${HOME}/.vimrc"
 
 config_dir=${XDG_CONFIG_HOME:-${HOME}/.config}
 mkdir -p "$config_dir"
+config_src=${dotfiles}/dirs/config
+[ -d "${config_src}" ] && link_dir "$config_src" "$config_dir"
 
-link_dir "${dotfiles}/xdg/config" "$config_dir"
 
 echo "--- Setup done!"
