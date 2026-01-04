@@ -49,7 +49,7 @@ link_dir() {
         pkg="${src##*/}"
         skip=0
         for os in ${supported_os}; do
-            pkg_name="${pkg%.${os}}"
+            pkg_name="${pkg%."${os}"}"
             if [ "$pkg_name" != "$pkg" ] ; then
                 if [ "$os" != "$os_type" ]; then
                     echo "Skipping ${pkg}"
