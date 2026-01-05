@@ -1,0 +1,13 @@
+[window]
+decorations_theme_variant = "Dark"
+option_as_alt = "OnlyLeft"
+
+[scrolling]
+history = 9999
+multiplier = 3
+
+[font]
+normal = { family = "Sarasa Fixed SC", style = "Regular" }
+
+[terminal]
+shell = "/bin/zsh"
