@@ -10,4 +10,4 @@ multiplier = 3
 normal = { family = "Sarasa Fixed SC", style = "Regular" }
 
 [terminal]
-shell = "/bin/zsh"
+shell = "zsh"
