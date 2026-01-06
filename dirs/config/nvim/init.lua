@@ -4,7 +4,8 @@ vim.g.mapleader = "\\"
 
 -- lazy.nvim
 require("config.lazy")
---
+-- plugins
+
 
 local opt = vim.opt
 local keymap = vim.keymap
@@ -66,14 +67,14 @@ opt.background = 'dark'
 vim.cmd.colorscheme('habamax')
 
 -- highlight trailing whitespace
-vim.api.nvim_set_hl(0, 'ExtraWhitespace', { bg = 'red' })
-vim.api.nvim_create_autocmd({ "WinEnter", "VimEnter" }, {
-    group = vim.api.nvim_create_augroup('TrailingSpace', { clear = true }),
-    pattern = "*",
-    callback = function()
-        vim.fn.matchadd('ExtraWhitespace', [[\s\+\%#\@<!$]])
-    end,
-})
+-- vim.api.nvim_set_hl(0, 'ExtraWhitespace', { bg = 'red' })
+-- vim.api.nvim_create_autocmd({ "WinEnter", "VimEnter" }, {
+--     group = vim.api.nvim_create_augroup('TrailingSpace', { clear = true }),
+--     pattern = "*",
+--     callback = function()
+--         vim.fn.matchadd('ExtraWhitespace', [[\s\+\%#\@<!$]])
+--     end,
+-- })
 
 -- Keymaps
 keymap.set('i', 'jk', '<Esc>')
