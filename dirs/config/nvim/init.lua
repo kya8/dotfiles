@@ -59,7 +59,7 @@ keymap.set('n', '<leader>l', '<cmd>set list!<CR>')
 
 opt.foldenable = false
 
--- Colors
+-- Cosmetics
 
 if not vim.g.vscode then
 opt.termguicolors = true
@@ -76,6 +76,12 @@ vim.cmd.colorscheme('carbonfox')
 --         vim.fn.matchadd('ExtraWhitespace', [[\s\+\%#\@<!$]])
 --     end,
 -- })
+
+require('lualine').setup{
+    options = {
+        icons_enabled = false,
+    }
+}
 
 end -- not vscode
 
