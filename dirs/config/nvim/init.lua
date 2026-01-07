@@ -61,10 +61,11 @@ opt.foldenable = false
 
 -- Colors
 
+if not vim.g.vscode then
 opt.termguicolors = true
 opt.background = 'dark'
 
-vim.cmd.colorscheme('habamax')
+vim.cmd.colorscheme('carbonfox')
 
 -- highlight trailing whitespace
 -- vim.api.nvim_set_hl(0, 'ExtraWhitespace', { bg = 'red' })
@@ -75,6 +76,8 @@ vim.cmd.colorscheme('habamax')
 --         vim.fn.matchadd('ExtraWhitespace', [[\s\+\%#\@<!$]])
 --     end,
 -- })
+
+end -- not vscode
 
 -- Keymaps
 keymap.set('i', 'jk', '<Esc>')
