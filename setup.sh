@@ -48,9 +48,11 @@ link_dir() {
         [ -e "$src" ] || continue # Prevent unexpanded *
         pkg="${src##*/}"
         skip=0
+        has_suffix=0
         for os in ${supported_os}; do
             pkg_name="${pkg%."${os}"}"
             if [ "$pkg_name" != "$pkg" ] ; then
+                has_suffix=1
                 if [ "$os" != "$os_type" ]; then
                     echo "Skipping ${pkg}"
                     skip=1
@@ -58,6 +60,11 @@ link_dir() {
                 break;
             fi
         done
+        # Skip non-specific entry if os-specific entry is present
+        if [ ${has_suffix} = 0 ] && [ -e "${src}.${os_type}" ]; then
+            echo "Skipping ${pkg}"
+            skip=1
+        fi
         [ ${skip} = 1 ] && continue
         my_link "$src" "$2/$pkg_name"
     done
