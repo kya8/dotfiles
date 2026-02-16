@@ -1,5 +1,7 @@
 # My zshrc
 
+# Custom functions
+fpath+=~/.zsh/functions
 
 autoload -Uz compinit promptinit
 #autoload -Uz run-help
