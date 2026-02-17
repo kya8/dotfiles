@@ -14,8 +14,8 @@ for file in "$@"; do
     timestamp=$(date -r "$file" "+%Y%m%d-%H%M%S")
 
     # 3. Extract parts of the path
-    dir=$(dirname "$file")
-    filename=$(basename "$file")
+    dir=$(dirname -- "$file")
+    filename=$(basename -- "$file")
 
     # 4. Extract extension
     # If filename contains a dot, extract extension, otherwise empty
@@ -45,7 +45,7 @@ for file in "$@"; do
     done
 
     # 8. Rename the file
-    mv "$file" "$target_path"
+    mv -- "$file" "$target_path"
     echo "Renamed: '$file' -> '$target_path'"
 
 done
