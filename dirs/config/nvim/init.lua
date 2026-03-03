@@ -62,6 +62,8 @@ keymap.set('n', '<leader>l', '<cmd>set list!<CR>')
 
 opt.foldenable = false
 
+opt.shell = "zsh"
+
 -- Cosmetics
 
 if not vim.g.vscode then
