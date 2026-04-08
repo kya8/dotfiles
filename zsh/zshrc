@@ -76,7 +76,7 @@ setopt HIST_IGNORE_SPACE
 
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
-SAVEHIST=10000
+SAVEHIST=50000
 
 
 ## never ever beep ever
@@ -84,8 +84,12 @@ setopt NO_BEEP
 
 setopt RM_STAR_SILENT
 
-## do not push dir on cd
-unsetopt AUTO_PUSHD
+## dir stack
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+# setopt PUSHD_TO_HOME
+# DIRSTACKSIZE=20
 
 setopt autocd
 
