@@ -1,10 +1,5 @@
-[user]
-	name = kya
-	email = <>
-[credential "https://github.com"]
-	username = kya8
+[include]
+	path = ~/.dotfiles/common/git-config
 [credential]
 	helper = libsecret
 
-[include]
-	path = ~/.dotfiles/common/git-alias

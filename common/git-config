@@ -1,3 +1,9 @@
+[user]
+	name = kya
+	email = <>
+[credential "https://github.com"]
+	username = kya8
+
 [alias]
     co = checkout
     st = status
