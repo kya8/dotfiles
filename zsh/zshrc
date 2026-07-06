@@ -1,7 +1,8 @@
 # My zshrc
 
 # Custom functions
-fpath+=~/.zsh/functions
+my_fpath=~/.zsh/functions
+fpath+=${my_fpath}
 
 autoload -Uz compinit promptinit
 #autoload -Uz run-help
@@ -188,11 +189,6 @@ fi
 cmd_exists() {
     command -v "$1" >/dev/null 2>&1
 }
-
-# Rustup. Activate only if there isn't another active rust installation.
-if ! cmd_exists cargo && [ -r ${HOME}/.cargo/env ]; then
-  source ${HOME}/.cargo/env
-fi
 
 
 # plugin dir
