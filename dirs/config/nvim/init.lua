@@ -94,6 +94,7 @@ end -- not vscode
 keymap.set('i', 'jk', '<Esc>')
 
 keymap.set('n', '<leader>\\', '<cmd>nohl<CR>')
+keymap.set('n', '<leader>w', '<cmd>set wrap!<CR>')
 
 -- keymap.set('n', '<leader>p', '<cmd>set paste!<CR>')
 
