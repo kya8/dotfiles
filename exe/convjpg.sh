@@ -21,17 +21,22 @@ usage() {
     echo "Convert input images to JPEG using ${prog}."
     echo
     echo "Options:"
-    echo "  -k    keep the original file after conversion"
-    echo "  -h    show this help message"
+    echo "  -k  Keep the original file after conversion"
+    echo "  -h  Show this help message"
+    echo "  -s  Show arguments passed to ${prog} invocation"
 }
 
-while getopts ":kh" opt; do
+while getopts ":khs" opt; do
     case "$opt" in
         k)
             keep_original=true
             ;;
         h)
             usage
+            exit 0
+            ;;
+        s)
+            echo "${prog} ${prog_args}"
             exit 0
             ;;
         \?)
@@ -45,13 +50,16 @@ shift $((OPTIND - 1))
 
 if [ "$#" -eq 0 ]; then
     usage
-    exit 0
+    exit 2
 fi
+
+has_error=false
 
 # Loop through all arguments passed to the script
 for file in "$@"; do
     if [ ! -f "$file" ]; then
         echo "Warning: '$file' not found. Skipping."
+        has_error=true
         continue
     fi
 
@@ -72,6 +80,11 @@ for file in "$@"; do
         echo "${file}" converted to "${out_name}"
     else
         echo Failed to convert "${file}"
+        has_error=true
     fi
 
 done
+
+if [ "$has_error" = true ]; then
+    exit 1
+fi
