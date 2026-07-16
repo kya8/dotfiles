@@ -5,11 +5,11 @@ fi
 
 if cmd_exists rustup; then
     # Completions
-    if ! [ -e "${my_fpath}/_rustup" ]; then
+    if ! (( ${+_comps[rustup]} )); then
         echo "Generating completions for rustup..."
         rustup completions zsh > "${my_fpath}/_rustup"
     fi
-    if ! [ -e "${my_fpath}/_cargo" ]; then
+    if ! (( ${+_comps[cargo]} )); then
         echo "Generating completions for cargo..."
         rustup completions zsh cargo > "${my_fpath}/_cargo"
     fi
