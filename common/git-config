@@ -7,6 +7,7 @@
 [alias]
     co = checkout
     st = status
+    s  = status
     br = branch
     cm = commit
     sw = switch
@@ -17,3 +18,5 @@
     fe = fetch
     pl = pull
     ps = push
+    l  = log
+    d  = diff
