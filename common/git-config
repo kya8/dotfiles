@@ -20,3 +20,7 @@
     ps = push
     l  = log
     d  = diff
+
+[rebase]
+	autoSquash = true
+
