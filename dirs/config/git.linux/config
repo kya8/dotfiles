@@ -3,3 +3,5 @@
 [credential]
 	helper = libsecret
 
+[include]
+        path = ~/.dotfiles/local/git
