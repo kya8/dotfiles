@@ -103,6 +103,9 @@ setopt autocd
 # autoload -U colors
 #colors
 
+# format for built-in `time'
+TIMEFMT='%J  %U user %S system %P cpu %M ram %*E total'
+
 ###### KEY BINDINGS ######
 
 # zkbd-compatible aliases
