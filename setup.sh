@@ -76,7 +76,7 @@ my_link "${dotfiles}/vimrc" "${HOME}/.vimrc"
 
 config_dir=${XDG_CONFIG_HOME:-${HOME}/.config}
 mkdir -p "$config_dir"
-config_src=${dotfiles}/dirs/config
+config_src=${dotfiles}/config
 [ -d "${config_src}" ] && link_dir "$config_src" "$config_dir"
 
 
