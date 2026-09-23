@@ -13,6 +13,6 @@ quit-after-last-window-closed = true
 
 window-inherit-working-directory = false
 
-# term = xterm-256color
+term = ghostty
 
 unfocused-split-opacity = 0.8
