@@ -164,7 +164,8 @@ fi
 
 ##### alias
 (( ${+aliases[ls]} )) || alias ls="ls --color=auto"
-alias l="ls -Alh"
+alias l="ls -lh"
+alias ll="ls -Alh"
 alias d="dirs -v"
 alias ...="cd ../.."
 # alias o="less -i"
