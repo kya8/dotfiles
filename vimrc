@@ -46,6 +46,9 @@ nnoremap <leader>p :set paste!<cr>
 " Ex mode is retarded
 nnoremap Q <Nop>
 
+set modeline
+set modelines=3
+
 filetype plugin indent on
 syntax enable
 set encoding=utf-8
