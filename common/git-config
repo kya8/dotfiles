@@ -18,7 +18,8 @@
     fe = fetch
     pl = pull
     ps = push
-    l  = log
+    l  = log --oneline --graph
+    ll = log --oneline --graph --all
     d  = diff
 
 [rebase]
