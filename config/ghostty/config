@@ -9,6 +9,8 @@ cursor-style = block
 cursor-style-blink = false
 shell-integration-features = no-cursor
 
+macos-option-as-alt = left
+
 quit-after-last-window-closed = true
 
 window-inherit-working-directory = false
