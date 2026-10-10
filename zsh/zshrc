@@ -1,7 +1,9 @@
 # My zshrc
 
+readonly zsh_home=~/.zsh
+
 # Custom functions
-my_fpath=~/.zsh/functions
+readonly my_fpath="${zsh_home}/functions"
 fpath+=${my_fpath}
 
 autoload -Uz compinit promptinit
@@ -189,14 +191,9 @@ fi
 # Remove `which' alias
 (( ${+aliases[which]} )) && unalias which
 
-##### Functions
-cmd_exists() {
-    command -v "$1" >/dev/null 2>&1
-}
 
-
-# plugin dir
-_zsh_plugin_dir="${HOME}/.zsh/plugins"
+# Plugins
+readonly _zsh_plugin_dir="${zsh_home}/plugins"
 
 # syntax highlighting
 _zsh_syntax_hl_path="${_zsh_plugin_dir}/\
@@ -210,6 +207,10 @@ zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 [ -r "${_zsh_autosuggestions_path}" ] && source "${_zsh_autosuggestions_path}"
 
+
+# Common defs used in sourced files
+source "${zsh_home}/utils.sh"
+
 ##### Site-specific config #####
 source_files_in_dir() {
 local rc
@@ -221,5 +222,6 @@ if [ -d "$1" ]; then
     done
 fi
 }
-source_files_in_dir ~/.zsh/rc.d
-source_files_in_dir ~/.zsh/rc.d.local
+source_files_in_dir ${zsh_home}/rc.d
+source_files_in_dir ${zsh_home}/rc.d.local
+unset -f source_files_in_dir
