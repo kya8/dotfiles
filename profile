@@ -1,7 +1,8 @@
 # Common login environment
 # Sourced by a login shell (bash, zsh)
 
-if [ -z "$_my_profile_sourced" ]; then
+# Only bash & zsh are supported.
+if ( [ -n "$ZSH_VERSION" ] && [[ -o login ]] ) || ( [ -n "$BASH_VERSION" ] && shopt -q login_shell ) ; then
 
 # homebrew
 if [ -x /opt/homebrew/bin/brew ]; then
@@ -29,7 +30,8 @@ if [[ "$OSTYPE" == linux* ]]; then
     export WINEDLLOVERRIDES=winemenubuilder.exe=d
 fi
 
-_my_profile_sourced=1
+else
+    echo "Warning: I'm being sourced by a non-login or unsupported shell. Skipping." >&2
 fi
 
 
