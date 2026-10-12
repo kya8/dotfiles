@@ -18,3 +18,10 @@ window-inherit-working-directory = false
 term = ghostty
 
 unfocused-split-opacity = 0.8
+
+# keybind = global:opt+t=toggle_quick_terminal
+
+config-file = ?config.local
+
+
+# vim: ft=confini
