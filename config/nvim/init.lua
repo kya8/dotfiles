@@ -15,8 +15,6 @@ opt.relativenumber = true
 
 opt.mouse = 'a'
 
-opt.scrolloff = 0
-
 opt.colorcolumn = '80,120'
 opt.wrap = false
 opt.textwidth = 120
@@ -64,9 +62,11 @@ opt.foldenable = false
 
 opt.shell = "zsh"
 
--- Cosmetics
 
+-- Outside vscode-neovim
 if not vim.g.vscode then
+
+-- Cosmetics
 opt.termguicolors = true
 opt.background = 'dark'
 
@@ -87,6 +87,9 @@ require('lualine').setup{
         icons_enabled = false,
     }
 }
+
+opt.scrolloff = 3
+opt.sidescrolloff = 8
 
 end -- not vscode
 
