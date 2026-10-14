@@ -22,6 +22,9 @@
     ll = log --oneline --graph --all
     d  = diff
 
+[log]
+    date = iso
+
 [rebase]
 	autoSquash = true
 
