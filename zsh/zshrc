@@ -36,8 +36,8 @@ else
 fi
 
 ps_shorten_pwd () {
-  local p=${${PWD:/~/\~}/#~\//\~/}
-  psvar[1]="${(@j[/]M)${(@s[/]M)p##*/}##(.|)?}$p:t"
+  local p=${(%):-%~}
+  psvar[1]="${(@j[/]M)${(@s[/]M)p##*/}##(\~*|.|)?}$p:t"
 }
 
 precmd_functions+=( ps_shorten_pwd )
@@ -53,6 +53,8 @@ PS1="%B%(?..%F{red}%?%f)%b%K{#444444}%(1j.%B%F{207}J%j%f%b.)%F{195}[%*]%f%n%F{#7
 zstyle ':completion:*' menu select
 # if no exact match, try case & hypen insensitive match
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z_-}={A-Za-z-_}'
+# Prevent caching user home dirs into named directories
+zstyle ':completion:*:*:-tilde-:*' tag-order named-directories directory-stack -
 
 # use extended glob from zsh
 setopt EXTENDED_GLOB
@@ -95,6 +97,9 @@ setopt PUSHD_SILENT
 # DIRSTACKSIZE=20
 
 setopt autocd
+
+unsetopt AUTO_NAME_DIRS
+#setopt CDABLE_VARS
 
 ## automatically decide when to page a list of completions
 #LISTMAX=0
