@@ -8,6 +8,7 @@
     co = checkout
     st = status
     s  = status
+    sh = show
     br = branch
     cm = commit
     sw = switch
