@@ -28,6 +28,7 @@ opt.hlsearch = true
 opt.incsearch = true
 opt.ignorecase = true
 opt.smartcase = true
+opt.wrapscan = false
 
 -- opt.clipboard = 'unnamedplus'
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]], { desc = "Yank to system clipboard" })
