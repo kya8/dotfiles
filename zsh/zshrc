@@ -214,7 +214,7 @@ zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 
 # Common defs used in sourced files
-source "${zsh_home}/utils.sh"
+#source "${zsh_home}/utils.zsh"
 
 ##### Site-specific config #####
 source_files_in_dir() {
