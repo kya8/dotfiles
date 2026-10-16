@@ -1,6 +1,6 @@
 # My zshrc
 
-readonly zsh_home=~/.zsh
+readonly zsh_home=~/.dotfiles/zsh
 
 # Custom functions
 readonly my_fpath="${zsh_home}/functions"

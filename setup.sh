@@ -70,8 +70,8 @@ link_dir() {
     done
 }
 
-my_link "${dotfiles}/zsh" "${HOME}/.zsh"
-my_link ".zsh/zshrc" "${HOME}/.zshrc"
+#my_link "${dotfiles}/zsh" "${HOME}/.zsh"
+my_link "${dotfiles}/zsh/zshrc" "${HOME}/.zshrc"
 my_link "${dotfiles}/vimrc" "${HOME}/.vimrc"
 
 config_dir=${XDG_CONFIG_HOME:-${HOME}/.config}
