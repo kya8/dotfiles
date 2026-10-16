@@ -8,6 +8,8 @@
     co = checkout
     st = status
     s  = status
+    a  = add
+    sh = show
     br = branch
     cm = commit
     sw = switch
@@ -21,6 +23,8 @@
     l  = log --oneline --graph
     ll = log --oneline --graph --all
     d  = diff
+    ds = diff --staged
+    sm = submodule
 
 [log]
     date = iso
@@ -28,3 +32,5 @@
 [rebase]
 	autoSquash = true
 
+
+# vim: ft=gitconfig
