@@ -18,6 +18,8 @@ export PATH
 # less
 export LESS="-i -R"
 
+export PAGER=less
+
 if command -v nvim &> /dev/null ; then
     export VISUAL=nvim
 else
