@@ -22,6 +22,7 @@
     l  = log --oneline --graph
     ll = log --oneline --graph --all
     d  = diff
+    ds = diff --staged
 
 [log]
     date = iso
