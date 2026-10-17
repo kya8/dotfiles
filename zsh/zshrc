@@ -163,7 +163,7 @@ bindkey "${key[Shift-Tab]}" reverse-menu-complete
 stty -ixon
 
 if [[ $OSTYPE == darwin* ]]; then
-export COLORTERM=1
+export COLORTERM=truecolor
 # Set-up ls colors
 elif [ -z ${LS_COLORS} ]; then
   test -r ~/.dir_colors && eval "$(dircolors -b ~/.dir_colors)" || eval "$(dircolors -b)"
