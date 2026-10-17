@@ -29,11 +29,11 @@ promptinit
 #%B%(?..[%F{red}%?%f] )%b%B%F{160}>%F{166}>%F{172}>%f%b '
 # right aligning text in PS1 is hacky.
 
-if [[ -n $SSH_CONNECTION ]]; then
-  ps1_ssh_indicator="%F{214} %f"
-else
-  ps1_ssh_indicator=""
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   ps1_ssh_indicator="%F{214} %f"
+# else
+#   ps1_ssh_indicator=""
+# fi
 
 ps_shorten_pwd () {
   local p=${(%):-%~}
@@ -43,7 +43,15 @@ ps_shorten_pwd () {
 precmd_functions+=( ps_shorten_pwd )
 
 #PS1="%B%(?..%F{red}%?%f)%b%K{#444444}%(1j.%B%F{207}J%j%f%b.)%F{195}[%*]%f%n%F{#75b5aa}@%f%m %F{#6a9fb5}%(5~!.../!)%4~%f%k%(!.%F{214}%f.%F{#444444}%f) "
-PS1="%B%(?..%F{red}%?%f)%b%K{#444444}%(1j.%B%F{207}J%j%f%b.)%F{195}[%*]%f%n%F{#75b5aa}@%f%m %F{#87cfff}%1v%f%k%(!.%F{214}%f.%F{#444444}%f) "
+PS1=\
+"%B%(?..%F{red}%?%f)%b\
+%K{#444444}\
+%(1j.%B%F{207}J%j%f%b.)\
+%F{195}[%*]%f\
+%n\
+%F{#75b5aa}@%f%m \
+%F{#87cfff}%1v%f%k\
+%(!.%F{214}%f.%F{#444444}%f) "
 
 #autoload bashcompinit
 #bashcompinit
@@ -166,7 +174,12 @@ if [[ $OSTYPE == darwin* ]]; then
 export COLORTERM=truecolor
 # Set-up ls colors
 elif [ -z ${LS_COLORS} ]; then
-  test -r ~/.dir_colors && eval "$(dircolors -b ~/.dir_colors)" || eval "$(dircolors -b)"
+    # LS_COLORS should be populated by system vendor.
+    # If it's empty, something's probably wrong
+    # (e.g. unrecognized TERM).
+    # Provide a fallback value in this case.
+    echo "LS_COLORS is not set. Using default value."
+    eval "$(TERM=xterm-256color dircolors -b)"
 fi
 
 ##### alias
