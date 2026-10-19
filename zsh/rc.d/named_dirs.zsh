@@ -5,6 +5,11 @@ edit_named_dirs() {
     setopt LOCAL_OPTIONS
     setopt ERR_RETURN
 
+    if [ -z "$_my_vi" ] ; then
+        echo "Vi editor is not defined." >&2
+        return 1
+    fi
+
     local -r f=${zsh_home}/rc.d.local/named_dirs.zsh
 
     if ! [ -e "$f" ] ; then
@@ -17,7 +22,7 @@ EOF
 
     # Get mtime
     local -r mtime_before=$(zstat -F '%s.%N' +mtime -- "$f")
-    v + -- "$f"
+    "$_my_vi" + -- "$f"
     local -r mtime_after=$(zstat -F '%s.%N' +mtime -- "$f")
 
     if [ "$mtime_before" != "$mtime_after" ] ; then

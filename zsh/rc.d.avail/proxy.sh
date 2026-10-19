@@ -1,5 +1,5 @@
 proxy_set() {
-    my_proxy=${my_proxy:-http://127.0.0.1:1080}
+    local my_proxy=${my_proxy:-http://127.0.0.1:1080}
     export all_proxy="${my_proxy}" http_proxy="${my_proxy}" https_proxy="${my_proxy}"
 }
 
