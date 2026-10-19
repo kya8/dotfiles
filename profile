@@ -2,12 +2,8 @@
 # Sourced by a login shell (bash, zsh)
 
 # Only bash & zsh are supported.
-if ( [ -n "$ZSH_VERSION" ] && [[ -o login ]] ) || ( [ -n "$BASH_VERSION" ] && shopt -q login_shell ) ; then
-
-# homebrew
-if [ -x /opt/homebrew/bin/brew ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv zsh)"
-fi
+if ( [ -n "$ZSH_VERSION" ] && [[ -o login ]] ) ||
+   ( [ -n "$BASH_VERSION" ] && shopt -q login_shell ) ; then
 
 # User-local PATH
 if ! [[ "$PATH" =~ "$HOME/bin:$HOME/.local/bin:" ]]; then
