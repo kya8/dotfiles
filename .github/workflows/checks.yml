@@ -22,6 +22,7 @@ jobs:
           curl -OL https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz
           tar -xf shellcheck-stable.linux.x86_64.tar.xz shellcheck-stable/shellcheck --strip-components=1
 
-      - run: |
+      - name: Check sh scripts
+        run: |
           ./shellcheck setup.sh
-          ./shellcheck exe/*.sh
+          ./shellcheck bin/*.sh
