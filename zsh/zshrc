@@ -1,10 +1,16 @@
 # My zshrc
 
 readonly zsh_home=~/.dotfiles/zsh
+readonly _zsh_plugin_dir="${zsh_home}/plugins"
 
 # Custom functions
 readonly my_fpath="${zsh_home}/functions"
 fpath+=${my_fpath}
+
+# Additional completions from zsh-completions
+if [ -d "${_zsh_plugin_dir}/zsh-completions/src" ] ; then
+    fpath+="${_zsh_plugin_dir}/zsh-completions/src"
+fi
 
 autoload -Uz compinit promptinit
 #autoload -Uz run-help
@@ -211,7 +217,6 @@ fi
 
 
 # Plugins
-readonly _zsh_plugin_dir="${zsh_home}/plugins"
 
 # syntax highlighting
 _zsh_syntax_hl_path="${_zsh_plugin_dir}/\
