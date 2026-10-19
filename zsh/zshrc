@@ -1,21 +1,15 @@
 # My zshrc
 
 readonly zsh_home=~/.dotfiles/zsh
-readonly _zsh_plugin_dir="${zsh_home}/plugins"
 
 # Custom functions
 readonly my_fpath="${zsh_home}/functions"
 fpath+=${my_fpath}
 
-# Additional completions from zsh-completions
-if [ -d "${_zsh_plugin_dir}/zsh-completions/src" ] ; then
-    fpath+="${_zsh_plugin_dir}/zsh-completions/src"
-fi
 
 autoload -Uz compinit promptinit
 #autoload -Uz run-help
 
-compinit
 promptinit
 # set prompt theme here
 # prompt walters
@@ -217,19 +211,22 @@ fi
 
 
 # Plugins
+readonly _zsh_plugin_dir="${zsh_home}/plugins"
 
 # syntax highlighting
 _zsh_syntax_hl_path="${_zsh_plugin_dir}/\
 fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
-
 [ -r "${_zsh_syntax_hl_path}" ] && source "${_zsh_syntax_hl_path}"
 
 # auto suggestions
 _zsh_autosuggestions_path="${_zsh_plugin_dir}/\
 zsh-autosuggestions/zsh-autosuggestions.zsh"
-
 [ -r "${_zsh_autosuggestions_path}" ] && source "${_zsh_autosuggestions_path}"
 
+# Additional completions from zsh-completions
+if [ -d "${_zsh_plugin_dir}/zsh-completions/src" ] ; then
+    fpath+="${_zsh_plugin_dir}/zsh-completions/src"
+fi
 
 # Common defs used in sourced files
 #source "${zsh_home}/utils.zsh"
@@ -248,3 +245,5 @@ fi
 source_files_in_dir ${zsh_home}/rc.d
 source_files_in_dir ${zsh_home}/rc.d.local
 unset -f source_files_in_dir
+
+# compinit is left to rc.d
