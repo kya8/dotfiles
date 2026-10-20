@@ -213,15 +213,11 @@ fi
 # Plugins
 readonly _zsh_plugin_dir="${zsh_home}/plugins"
 
-# syntax highlighting
-_zsh_syntax_hl_path="${_zsh_plugin_dir}/\
-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
-[ -r "${_zsh_syntax_hl_path}" ] && source "${_zsh_syntax_hl_path}"
-
 # auto suggestions
 _zsh_autosuggestions_path="${_zsh_plugin_dir}/\
 zsh-autosuggestions/zsh-autosuggestions.zsh"
 [ -r "${_zsh_autosuggestions_path}" ] && source "${_zsh_autosuggestions_path}"
+unset _zsh_autosuggestions_path
 
 # Additional completions from zsh-completions
 if [ -d "${_zsh_plugin_dir}/zsh-completions/src" ] ; then
