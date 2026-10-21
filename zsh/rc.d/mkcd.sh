@@ -1,8 +1,17 @@
 mkcd() {
-  if [ $# -ne 1 ]; then
-    echo "Usage: mkcd <directory>"
-    return 1
+  if [ $# -eq 0 ]; then
+    echo "mkcd: Create all directories, then cd into the last directory."
+    echo
+    echo "Usage: mkcd <directory ...>"
+    return 2
   fi
-  mkdir -p -- "$1" && cd -- "$1"
+
+  while [ $# -gt 0 ]; do
+      mkdir -p -- "$1" || return
+      if [ $# -eq 1 ] ; then
+          cd -- "$1" || return
+      fi
+      shift
+  done
 }
 
