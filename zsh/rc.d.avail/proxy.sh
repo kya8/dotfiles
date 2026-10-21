@@ -1,6 +1,11 @@
 proxy_set() {
-    local my_proxy=${my_proxy:-http://127.0.0.1:1080}
-    export all_proxy="${my_proxy}" http_proxy="${my_proxy}" https_proxy="${my_proxy}"
+    if [ $# -eq 0 ]; then
+        _my_proxy=${my_proxy:-http://127.0.0.1:1080}
+    else
+        _my_proxy=$1
+    fi
+    export all_proxy="$_my_proxy" http_proxy="$_my_proxy" https_proxy="$_my_proxy"
+    unset _my_proxy
 }
 
 proxy_unset() {
