@@ -1,9 +1,9 @@
 # Rustup. Activate only if there isn't another active rust installation.
-if ! cmd_exists cargo && [ -r "${HOME}/.cargo/env" ]; then
+if ! has_cmd cargo && [ -r "${HOME}/.cargo/env" ]; then
   source "${HOME}/.cargo/env"
 fi
 
-if cmd_exists rustup && [ -n "${my_fpath}" ]; then
+if has_cmd rustup && [ -n "${my_fpath}" ]; then
     # Completions
     if ! (( ${+_comps[rustup]} )); then
         echo "Generating completions for rustup..."

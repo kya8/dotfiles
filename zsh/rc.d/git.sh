@@ -1,3 +1,3 @@
-if cmd_exists git ; then
+if has_cmd git ; then
     alias g=git
 fi

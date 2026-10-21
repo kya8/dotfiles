@@ -1,4 +1,4 @@
-if cmd_exists yazi; then
+if has_cmd yazi; then
 
 alias y=yazi
 

@@ -1,8 +1,8 @@
-if cmd_exists nvim ; then
+if has_cmd nvim ; then
     alias v=nvim
     alias vv="nvim -R"
     readonly -g _my_vi=nvim
-elif cmd_exists vim ; then
+elif has_cmd vim ; then
     alias v=vim
     alias vv=view
     readonly -g _my_vi=vim
