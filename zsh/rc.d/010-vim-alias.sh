@@ -8,5 +8,6 @@ elif has_cmd vim ; then
     readonly -g _my_vi=vim
 else
     alias v=vi
+    alias vv="vi -R"
     readonly -g _my_vi=vi
 fi
