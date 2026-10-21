@@ -181,6 +181,7 @@ elif [ -z ${LS_COLORS} ]; then
     echo "LS_COLORS is not set. Using default value."
     eval "$(TERM=xterm-256color dircolors -b)"
 fi
+export CLICOLOR=1
 
 ##### alias
 (( ${+aliases[ls]} )) || alias ls="ls --color=auto"
