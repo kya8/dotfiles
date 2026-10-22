@@ -146,6 +146,10 @@ bindkey -e
 # unlike bash, ctrl-u will delete whole line by default in zsh
 bindkey "^U" backward-kill-line
 
+# Make ctrl-j insert a literal newline.
+bindkey "^J" self-insert
+# Or, use esc enter, or ctrl-v ctrl-j
+
 # Page Up/Down context search
 bindkey "${key[PageUp]}" history-beginning-search-backward
 bindkey "${key[PageDown]}" history-beginning-search-forward
