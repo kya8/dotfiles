@@ -6,6 +6,7 @@
 
 [alias]
     co = checkout
+    cl = clone
     st = status
     s  = status
     a  = add
