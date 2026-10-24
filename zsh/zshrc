@@ -67,6 +67,8 @@ zstyle ':completion:*:*:-tilde-:*' tag-order named-directories directory-stack -
 # use extended glob from zsh
 setopt EXTENDED_GLOB
 
+setopt INTERACTIVE_COMMENTS
+
 # prompt before exiting with bg jobs running
 setopt CHECK_JOBS
 
