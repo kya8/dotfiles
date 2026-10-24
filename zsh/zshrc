@@ -212,6 +212,7 @@ case "${XDG_CURRENT_DESKTOP}" in
 esac
 elif [[ $OSTYPE == darwin* ]]; then
 alias o=open
+alias ov="open -R" # Reveal file in finder
 fi
 
 # Remove `which' alias
