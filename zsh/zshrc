@@ -220,7 +220,11 @@ fi
 
 
 # Plugins
+if [ -n "$zsh_disable_plugins" ] ; then
+readonly _zsh_plugin_dir="${zsh_home}/plugins/disabled"
+else
 readonly _zsh_plugin_dir="${zsh_home}/plugins"
+fi
 
 # auto suggestions
 _zsh_autosuggestions_path="${_zsh_plugin_dir}/\
