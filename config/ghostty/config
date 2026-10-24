@@ -21,6 +21,9 @@ unfocused-split-opacity = 0.8
 
 # keybind = global:opt+t=toggle_quick_terminal
 
+# bold+bright color for intense text
+bold-color=bright
+
 config-file = ?config.local
 
 
