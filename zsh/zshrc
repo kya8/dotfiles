@@ -240,19 +240,19 @@ fi
 # Common defs used in sourced files
 source "${zsh_home}/utils.zsh"
 
-##### Site-specific config #####
-source_files_in_dir() {
-local rc
-if [ -d "$1" ]; then
-    for rc in "$1"/*(N); do
-        if [ -f "$rc" ]; then
-            . "$rc"
-        fi
-    done
-fi
-}
-source_files_in_dir ${zsh_home}/rc.d
-source_files_in_dir ${zsh_home}/rc.d.local
-unset -f source_files_in_dir
+merge_source "${zsh_home}/rc.d" "${zsh_home}/rc.d.local"
+
+# source_files_in_dir() {
+# local rc
+# if [ -d "$1" ]; then
+#     for rc in "$1"/*(N); do
+#         if [ -f "$rc" ]; then
+#             . "$rc"
+#         fi
+#     done
+# fi
+# }
+# source_files_in_dir ${zsh_home}/rc.d
+# source_files_in_dir ${zsh_home}/rc.d.local
 
 # compinit is left to rc.d
