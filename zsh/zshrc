@@ -233,7 +233,7 @@ if [ -d "${_zsh_plugin_dir}/zsh-completions/src" ] ; then
 fi
 
 # Common defs used in sourced files
-#source "${zsh_home}/utils.zsh"
+source "${zsh_home}/utils.zsh"
 
 ##### Site-specific config #####
 source_files_in_dir() {
