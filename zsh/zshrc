@@ -4,7 +4,8 @@ readonly zsh_home=~/.dotfiles/zsh
 
 # Custom functions
 readonly my_fpath="${zsh_home}/functions"
-fpath+=${my_fpath}
+readonly my_fpath_local="${my_fpath}/local"
+fpath+=("$my_fpath_local" "$my_fpath")
 
 
 autoload -Uz compinit promptinit
