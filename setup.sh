@@ -2,6 +2,33 @@
 
 set -eu
 
+[ -t 1 ] && t=1
+# shellcheck disable=SC2034
+{
+csi='['
+reset="${t+${csi}0m}"
+default="${t+${csi}39m}" # reset fg color
+intense="${t+${csi}1m}"
+
+red="${t+${csi}31m}"
+redi="${t+${csi}1;31m}"
+green="${t+${csi}32m}"
+greeni="${t+${csi}1;32m}"
+yellow="${t+${csi}33m}"
+yellowi="${t+${csi}1;33m}"
+blue="${t+${csi}34m}"
+bluei="${t+${csi}1;34m}"
+magenta="${t+${csi}35m}"
+magentai="${t+${csi}1;35m}"
+cyan="${t+${csi}36m}"
+cyani="${t+${csi}1;36m}"
+
+gray="${t+${csi}38;5;245m}"
+grayi="${t+${csi}1;38;5;245m}"
+orange="${t+${csi}38;5;202m}"
+orangei="${t+${csi}1;38;5;202m}"
+}
+
 os_type=$(uname -s)
 
 case "${os_type}" in
@@ -26,17 +53,27 @@ case "${os_type}" in
         ;;
 esac
 
-echo "--- OS type: ${os_type}"
+echo "${grayi}---${reset} OS type: ${cyani}${os_type}${reset}"
 
 dotfiles=$(git -C "$(dirname -- "$0")" rev-parse --show-toplevel)
-echo "--- Using dotfiles repo: ${dotfiles}"
+echo "${grayi}---${reset} Using dotfiles repo: ${orangei}${dotfiles}${reset}"
 
 my_link() {
     if [ -e "$2" ]; then
-        echo "$2 already exists. Skipping."
+        if [ -d "$2" ]; then
+            color="$bluei"
+        else
+            color="$intense"
+        fi
+        echo "${yellow}Skipping existing entry:${reset} ${color}$2${reset}"
         return 0
     else
-        echo "Linking $2 -> $1"
+        if [ -d "$1" ]; then
+            color="$blue"
+        else
+            color="$default"
+        fi
+        echo "${green}Linking${reset} ${cyani}$2${default} -> ${color}$1${reset}"
         ln -sf "$1" "$2" # -e returns false for dangling symlinks, overwrite them with -f
     fi
 }
@@ -54,7 +91,7 @@ link_dir() {
             if [ "$pkg_name" != "$pkg" ] ; then
                 has_suffix=1
                 if [ "$os" != "$os_type" ]; then
-                    echo "Skipping ${pkg}"
+                    echo "${yellow}Skipping ${magentai}${pkg}${reset}"
                     skip=1
                 fi
                 break;
@@ -62,7 +99,7 @@ link_dir() {
         done
         # Skip non-specific entry if os-specific entry is present
         if [ ${has_suffix} = 0 ] && [ -e "${src}.${os_type}" ]; then
-            echo "Skipping ${pkg}"
+            echo "${yellow}Skipping ${magentai}${pkg}${reset}"
             skip=1
         fi
         [ ${skip} = 1 ] && continue
@@ -80,4 +117,4 @@ config_src=${dotfiles}/config
 [ -d "${config_src}" ] && link_dir "$config_src" "$config_dir"
 
 
-echo "--- Setup done!"
+echo "${grayi}--- ${default}Setup done!${reset}"
