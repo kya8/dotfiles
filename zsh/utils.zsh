@@ -53,36 +53,6 @@ debug_printf() {
     printf "$@"
 }
 
-print_vars() {
-    local var
-    for var in "$@" ; do
-        if is_exported "$var" ; then
-            print -P "%B%F{green}${var}%f%b=${(P)var}"
-        elif [ $? -eq 1 ] ; then
-            print -P "%F{cyan}${var}%f=${(P)var}"
-        else
-            print -P "%B%F{red}${var}%f%b is not set"
-        fi
-    done
-}
-
-# join strings with separator
-# equiv. to ${(j:separator:)@}
-my_join() {
-    if [ $# -lt 2 ]; then
-        echo "Usage: $0 <SEP> <STR ...>"
-        return 2
-    fi
-
-    local -r sep="$1"; shift
-    local str arg
-    str="$1"; shift
-    for arg in "$@" ; do
-        str="${str}${sep}${arg}"
-    done
-    echo $str
-}
-
 # Source all files from arguments, in lexical order of their basenames.
 # A directory argument adds all regular files under that directory (non-recursively).
 merge_source() {
@@ -115,5 +85,4 @@ merge_source() {
         source "$f"
     done
 }
-
 
