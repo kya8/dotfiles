@@ -1,5 +1,8 @@
 # My zshrc
 
+# In case I'm being sourced by a non-interactive shell
+[[ "$-" == *i* ]] || return 0
+
 readonly zsh_home=~/.dotfiles/zsh
 
 # Custom functions
