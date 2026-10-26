@@ -1,4 +1,4 @@
-readonly _default_proxy="http://127.0.0.1:1080"
+typeset -gr _default_proxy="http://127.0.0.1:1080"
 
 proxy_set() {
     local _my_proxy
