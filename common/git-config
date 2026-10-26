@@ -8,7 +8,7 @@
     co = checkout
     cl = clone
     st = status
-    s  = status
+    s  = status --short --branch
     a  = add
     sh = show
     br = branch
@@ -33,5 +33,8 @@
 [rebase]
 	autoSquash = true
 
+[status]
+        showStash = true
+     ; relativePaths = false
 
 # vim: ft=gitconfig
