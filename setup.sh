@@ -57,6 +57,9 @@ echo "${grayi}---${reset} OS type: ${cyani}${os_type}${reset}"
 dotfiles=$(git -C "$(dirname -- "$0")" rev-parse --show-toplevel)
 echo "${grayi}---${reset} Using dotfiles repo: ${orangei}${dotfiles}${reset}"
 
+echo "${grayi}---${reset} Checking git submodules..."
+git submodule update --init --recursive
+
 my_link() {
     if [ -e "$2" ]; then
         if [ -d "$2" ]; then
