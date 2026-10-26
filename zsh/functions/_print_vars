@@ -1,0 +1,6 @@
+#compdef print_vars
+
+_vars "$@"
+
+
+# vim: ft=zsh

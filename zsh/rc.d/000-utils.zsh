@@ -71,6 +71,7 @@ print_vars() {
         fi
     done
 }
+alias pvar=print_vars
 
 # join strings with separator
 # equiv. to ${(j:separator:)@}
