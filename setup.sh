@@ -1,33 +1,32 @@
 #!/bin/sh
 
-set -eu
+set -e
 
-[ -t 1 ] && t=1
-# shellcheck disable=SC2034
-{
 csi='['
-reset="${t+${csi}0m}"
-default="${t+${csi}39m}" # reset fg color
-intense="${t+${csi}1m}"
+# shellcheck disable=SC2034
+if [ -t 1 ] ; then
+reset="${csi}0m"
+default="${csi}39m" # reset fg color
+intense="${csi}1m"
 
-red="${t+${csi}31m}"
-redi="${t+${csi}1;31m}"
-green="${t+${csi}32m}"
-greeni="${t+${csi}1;32m}"
-yellow="${t+${csi}33m}"
-yellowi="${t+${csi}1;33m}"
-blue="${t+${csi}34m}"
-bluei="${t+${csi}1;34m}"
-magenta="${t+${csi}35m}"
-magentai="${t+${csi}1;35m}"
-cyan="${t+${csi}36m}"
-cyani="${t+${csi}1;36m}"
+red="${csi}31m"
+redi="${csi}1;31m"
+green="${csi}32m"
+greeni="${csi}1;32m"
+yellow="${csi}33m"
+yellowi="${csi}1;33m"
+blue="${csi}34m"
+bluei="${csi}1;34m"
+magenta="${csi}35m"
+magentai="${csi}1;35m"
+cyan="${csi}36m"
+cyani="${csi}1;36m"
 
-gray="${t+${csi}38;5;245m}"
-grayi="${t+${csi}1;38;5;245m}"
-orange="${t+${csi}38;5;202m}"
-orangei="${t+${csi}1;38;5;202m}"
-}
+gray="${csi}38;5;245m"
+grayi="${csi}1;38;5;245m"
+orange="${csi}38;5;202m"
+orangei="${csi}1;38;5;202m"
+fi
 
 os_type=$(uname -s)
 
@@ -73,7 +72,7 @@ my_link() {
         else
             color="$default"
         fi
-        echo "${green}Linking${reset} ${cyani}$2${default} -> ${color}$1${reset}"
+        echo "${green}Linking${reset} ${magentai}$2${default} -> ${color}$1${reset}"
         ln -sf "$1" "$2" # -e returns false for dangling symlinks, overwrite them with -f
     fi
 }
@@ -91,7 +90,7 @@ link_dir() {
             if [ "$pkg_name" != "$pkg" ] ; then
                 has_suffix=1
                 if [ "$os" != "$os_type" ]; then
-                    echo "${yellow}Skipping ${magentai}${pkg}${reset}"
+                    echo "${yellow}Skipping ${grayi}${pkg}${reset}"
                     skip=1
                 fi
                 break;
@@ -99,7 +98,7 @@ link_dir() {
         done
         # Skip non-specific entry if os-specific entry is present
         if [ ${has_suffix} = 0 ] && [ -e "${src}.${os_type}" ]; then
-            echo "${yellow}Skipping ${magentai}${pkg}${reset}"
+            echo "${yellow}Skipping ${grayi}${pkg}${reset}"
             skip=1
         fi
         [ ${skip} = 1 ] && continue
