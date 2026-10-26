@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
-set -eu
+set -euo pipefail
 
 prog=cjpegli
-prog_args="-d 1 --chroma_subsampling=444 -p 0"
+prog_args=(-d 1 --chroma_subsampling=444 -p 0)
 keep_original=false
 
 cmd_exists() {
@@ -36,7 +36,7 @@ while getopts ":khs" opt; do
             exit 0
             ;;
         s)
-            echo "${prog} ${prog_args}"
+            echo "${prog} ${prog_args[*]}"
             exit 0
             ;;
         \?)
@@ -72,7 +72,7 @@ for file in "$@"; do
         counter=$((counter + 1))
     done
 
-    if ${prog} ${prog_args} "$file" "$out_name" >/dev/null 2>&1; then
+    if ${prog} "${prog_args[@]}" "$file" "$out_name" >/dev/null 2>&1; then
         touch -r "${file}" "${out_name}"
         if [ "$keep_original" = false ]; then
             rm -- "$file"
