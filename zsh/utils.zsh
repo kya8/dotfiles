@@ -33,6 +33,10 @@ is_false() {
     return 1
 }
 
+is_digits() {
+    [[ "$1" =~ ^[0-9]+$ ]]
+}
+
 # is in a interactive prompt (Top level and INteractive)
 is_tin() {
     [[ -o interactive ]] && (( $zsh_eval_context[(Ie)toplevel] ))
