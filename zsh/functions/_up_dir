@@ -1,0 +1,16 @@
+#compdef up_dir
+
+(( CURRENT == 2 )) || return 1
+
+local parent=${PWD:h}
+local depth=1
+local -a levels descriptions
+
+while [[ $parent != / ]] && (( depth <= 256 )); do
+    levels+=("$depth")
+    descriptions+=("$depth $parent")
+    parent=${parent:h}
+    (( depth++ ))
+done
+
+compadd -V parent-directories -l -d descriptions -a levels

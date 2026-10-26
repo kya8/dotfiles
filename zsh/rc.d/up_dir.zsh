@@ -1,4 +1,4 @@
-ud() {
+up_dir() {
     local n=${1:-1}
     if ! is_digits "$n" || (( n < 1 )) || (( n > 256 )); then
         echo >&2 "Usage: $0 [NUM]"
@@ -12,3 +12,5 @@ ud() {
 
     cd -- "$arg"
 }
+
+alias ud=up_dir
