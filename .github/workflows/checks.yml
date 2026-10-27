@@ -5,7 +5,7 @@ on:
     branches: [ "master" ]
     paths:
       - "setup.sh"
-      - "exe/*.sh"
+      - "bin/*.sh"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -15,11 +15,11 @@ jobs:
     runs-on: ubuntu-slim
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Get shellcheck
         run: |
-          curl -OL https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz
+          curl --tlsv1.2 -sSfOL https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz
           tar -xf shellcheck-stable.linux.x86_64.tar.xz shellcheck-stable/shellcheck --strip-components=1
 
       - name: Check sh scripts
