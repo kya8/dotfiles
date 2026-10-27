@@ -9,10 +9,12 @@
     cl = clone
     st = status
     s  = status --short --branch
+    ss = stash
     a  = add
     sh = show
     br = branch
     cm = commit
+    cma = commit --amend
     sw = switch
     rb = rebase
     re = reset
