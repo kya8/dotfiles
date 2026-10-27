@@ -79,7 +79,7 @@ proxy_print() {
     done
 }
 
-proxy_set
+[ -z "$all_proxy" ] && proxy_set ||:
 
 
 # vim: ft=zsh

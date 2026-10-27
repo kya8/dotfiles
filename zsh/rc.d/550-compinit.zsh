@@ -1,2 +1,5 @@
 # should come after adding all custom fpaths
-compinit
+
+if ! (( ${+_comps} )) ; then
+  compinit
+fi
