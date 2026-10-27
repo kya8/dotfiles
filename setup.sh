@@ -6,7 +6,6 @@ csi='['
 # shellcheck disable=SC2034
 if [ -t 1 ] ; then
   reset="${csi}0m"
-  default="${csi}39m" # reset fg color
   intense="${csi}1m"
   bold=${intense}
 
@@ -22,11 +21,15 @@ if [ -t 1 ] ; then
   magentai="${csi}1;35m"
   cyan="${csi}36m"
   cyani="${csi}1;36m"
+  default="${csi}39m" # reset fg color
+  defaulti="${csi}1;39m"
 
   gray="${csi}38;5;245m"
   grayi="${csi}1;38;5;245m"
   orange="${csi}38;5;202m"
   orangei="${csi}1;38;5;202m"
+  yg="${csi}38;5;154m" # yellow-green
+  ygi="${csi}1;38;5;154m"
 
   underline="${csi}4m"
   ubold="${csi}1;4m"
@@ -35,14 +38,17 @@ fi
 os_type=$(uname -s)
 force=0 # Overwrite existing symlinks
 check_sm=1
+dry=0
+verbosity=0
 
 usage() {
   echo "${ubold}Usage:${reset} ${bold}${0##*/}${reset} [OPTIONS]"
   echo
   echo "${ubold}Options:${reset}"
   echo "  ${bold}-f, --force${reset}            Force overwrite symlinks"
-  echo "  ${bold}-h, --help${reset}             Show this help message"
   echo "  ${bold}-s, --skip-submodules${reset}  Skip checking submodules"
+  echo "  ${bold}-d, --dry-run${reset}          Only show what would be done"
+  echo "  ${bold}-h, --help${reset}             Show this help message"
 }
 
 has_cmd() {
@@ -53,12 +59,16 @@ while [ $# -gt 0 ]; do
   case "$1" in
     -f|--force)
       force=1 ;;
+    -s|--skip-submodules)
+      check_sm=0 ;;
+    -d|--dry-run)
+      dry=1 ;;
+    -v)
+      verbosity=$(( verbosity + 1)) ;;
     -h|--help)
       usage
       exit 0
       ;;
-    -s|--skip-submodules)
-      check_sm=0 ;;
     -*)
       echo >&2 "Invalid option: $1"
       exit 2
@@ -70,6 +80,14 @@ while [ $# -gt 0 ]; do
   esac
   shift
 done
+
+leader="${grayi}---${reset}"
+if [ "${dry}" = 0 ]; then
+leader_run="$leader"
+else
+leader_run="${grayi}*** Dry run:${reset}"
+header="${grayi}Dry run:${reset} "
+fi
 
 case "${os_type}" in
   Linux*)
@@ -93,7 +111,7 @@ case "${os_type}" in
     ;;
 esac
 
-echo "${grayi}---${reset} OS type: ${cyani}${os_type}${reset}"
+echo "${leader} OS type: ${cyani}${os_type}${reset}"
 
 if has_cmd git ; then
   dotfiles=$(git -C "$(dirname -- "$0")" rev-parse --show-toplevel)
@@ -101,14 +119,14 @@ else
   dotfiles=$(dirname -- "$0")
 fi
 
-echo "${grayi}---${reset} Using dotfiles repo: ${orangei}${dotfiles}${reset}"
+echo "${leader} Using dotfiles repo: ${yg}${ubold}${dotfiles}${reset}"
 
 if [ "$check_sm" = 1 ]; then
   if has_cmd git ; then
-    echo "${grayi}---${reset} Checking git submodules..."
-    git -C "$dotfiles" submodule update --init --recursive
+    echo "${leader_run} Checking git submodules..."
+    [ "$dry" = 0 ] && git -C "$dotfiles" submodule update --init --recursive
   else
-    echo "${grayi}---${reset} Git was not found. Skipping submodule check."
+    echo "${leader} Git was not found. Skipping submodule check."
   fi
 fi
 
@@ -134,12 +152,16 @@ my_link() {
       color="$default"
     fi
     if [ -e "$2" ]; then
-      echo "${orangei}Overwriting link${reset} ${magentai}$2${default} -> ${color}$1${reset}"
+      echo "${header}${orangei}Overwriting link${reset} ${magentai}$2${default} -> ${color}$1${reset}"
     else
-      echo "${green}Linking${reset} ${magentai}$2${default} -> ${color}$1${reset}"
+      echo "${header}${green}Linking${reset} ${magentai}$2${default} -> ${color}$1${reset}"
     fi
-    ln -sfn "$1" "$2"
-    # `-n' is not standard, but supported on GNU and BSD variants of ln
+    if [ "$dry" = 0 ]; then
+      ln -sfn "$1" "$2"
+      # `-n' is not standard, but supported on GNU and BSD variants of ln
+    else
+      return 0
+    fi
   fi
 }
 
@@ -167,7 +189,7 @@ link_dir() {
       echo "${yellow}Skipping ${grayi}${pkg}${reset}"
       skip=1
     fi
-    [ ${skip} = 1 ] && continue
+    [ "$skip" = 1 ] && continue
     my_link "$src" "$2/$pkg_name"
   done
 }
@@ -178,8 +200,9 @@ my_link "${dotfiles}/vimrc" "${HOME}/.vimrc"
 
 config_dir=${XDG_CONFIG_HOME:-${HOME}/.config}
 mkdir -p "$config_dir"
+echo "${leader_run} Linking configs in ${ubold}${config_dir}${reset}..."
 config_src=${dotfiles}/config
 [ -d "${config_src}" ] && link_dir "$config_src" "$config_dir"
 
 
-echo "${grayi}--- ${default}Setup done!${reset}"
+echo "${leader} ${defaulti}Setup done!${reset}"
