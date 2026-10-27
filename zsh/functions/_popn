@@ -1,0 +1,34 @@
+#compdef popn
+
+(( CURRENT == 2 )) || return 1
+(( ${#dirstack} )) || return 1
+
+local directory
+local index=0
+local -a levels matches descriptions description
+local -a directories=("$PWD" "${dirstack[@]}")
+
+for directory in "${directories[@]}"; do
+    descriptions+=("$index $directory")
+    if (( index < ${#dirstack} )); then
+        levels+=("$index")
+    fi
+    (( index++ ))
+done
+
+compstate[list]='list force'
+compadd -O matches -a levels
+if (( ! ${#matches} )); then
+    local message=${(F)descriptions}
+    compadd -x "${message//\%/%%}"
+    compstate[insert]=''
+    return 0
+fi
+
+for (( index = 0; index < ${#directories}; index++ )); do
+    description=("${descriptions[index+1]}")
+    levels=("${(@M)matches:#$index}")
+    compadd -V directory-stack -2 -l -d description -E $(( ! ${#levels} )) -a levels
+done
+
+return 0
