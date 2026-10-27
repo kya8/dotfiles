@@ -20,7 +20,7 @@ term = ghostty
 unfocused-split-opacity = 0.8
 
 # keybind = global:opt+t=toggle_quick_terminal
-keybind = alt+d=new_split:auto
+keybind = super+d=new_split:auto
 keybind = alt+h=goto_split:left
 keybind = alt+l=goto_split:right
 keybind = alt+j=goto_split:down
@@ -31,6 +31,8 @@ keybind = super+arrow_right=next_tab
 
 # bold+bright color for intense text
 bold-color=bright
+
+split-divider-color=004b92
 
 config-file = ?config.local
 
