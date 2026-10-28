@@ -1,12 +1,12 @@
 if [[ "$OSTYPE" == darwin* ]] ; then
-    alias c=pbcopy
-    alias p=pbpaste
+    alias cbc=pbcopy
+    alias cbp=pbpaste
 elif [ -n "$WAYLAND_DISPLAY" ] && has_cmd wl-copy ; then
-    alias c=wl-copy
-    alias p=wl-paste
+    alias cbc=wl-copy
+    alias cbp=wl-paste
 elif [ -n "$DISPLAY" ] && has_cmd xclip ; then
-    alias c="xclip -i -selection clipboard"
-    alias p="xclip -o -selection clipboard"
+    alias cbc="xclip -i -selection clipboard"
+    alias cbp="xclip -o -selection clipboard"
 fi
 
 
