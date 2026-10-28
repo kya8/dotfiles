@@ -8,9 +8,9 @@ case "${os_type}" in
     os_type=linux
 # shellcheck disable=SC1091
 {
-    [ -r "/etc/os-release" ] && . "/etc/os-release"
+    [ -r "/etc/os-release" ] && . "/etc/os-release" \
+    && os_ver=${FANCY_NAME:-${PRETTY_NAME}}
 }
-    os_ver=${FANCY_NAME:-${PRETTY_NAME}}
     [ -z "$os_ver" ] && os_ver="Unknown version"
     ;;
   Darwin*)
@@ -33,7 +33,7 @@ case "${os_type}" in
     ;;
 esac
 
-csi='['
+csi=$(printf '\033[')
 # shellcheck disable=SC2034
 if [ -t 1 ] ; then
   reset="${csi}0m"
