@@ -10,3 +10,5 @@ popn() {
     fi
     popd
 }
+
+alias pop=popn
