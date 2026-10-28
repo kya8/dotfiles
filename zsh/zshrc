@@ -12,36 +12,13 @@ readonly my_fpath="${zsh_home}/functions"
 readonly my_fpath_local="${my_fpath}/local"
 fpath+=("$my_fpath_local" "$my_fpath")
 
-
 autoload -Uz compinit
-#autoload -Uz run-help
-
-# promptinit
-# set prompt theme here
-# prompt walters
-
-# a portable newline variable
-# _newline=$'\n'
-
-# notes on colors:
-# The %F{}%f colour should be set to colour, a decimal integer, the name of
-# one of the eight most widely-supported colours or as a ‘#’ followed by an RGB
-# triplet in hexadecimal format.
-# or use plain escape sequence \033[...m
-
-# custom prompt
-#PS1='
-#%F{blue}%n%F{cyan}@%f%m : %B%F{blue}%(5~!.../!)%4~%f%b : %(1j.%B%F{magenta}%j%f%b : .)%B%*%b
-#%B%(?..[%F{red}%?%f] )%b%B%F{160}>%F{166}>%F{172}>%f%b '
-# right aligning text in PS1 is hacky.
-
-# if [[ -n $SSH_CONNECTION ]]; then
-#   ps1_ssh_indicator="%F{214} %f"
-# else
-#   ps1_ssh_indicator=""
-# fi
 
 
+# --- Prompt config
+# psvar:
+#  1. shortened cwd
+#  2. Flag to show time in PS1
 ps_shorten_pwd() {
   local p=${(%):-%~}
   psvar[1]="${(@j[/]M)${(@s[/]M)p##*/}##(\~*|.|)?}$p:t"
@@ -58,20 +35,38 @@ ps_toggle_time() {
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd ps_shorten_pwd
 
+source "${zsh_home}/utils/icons.zsh"
+_local_cache_file="${dotfiles}/local/cache"
+[[ -r $_local_cache_file ]] && source "$_local_cache_file"
+
+_ps_color_dir="#87cfff"
+# _ps_color_dir="#02afff" # default in p10k
+_ps_color_bg="#444444"
+_ps_color_host_bg="#292929"
+
 #PS1="%B%(?..%F{red}%?%f)%b%K{#444444}%(1j.%B%F{207}J%j%f%b.)%F{195}[%*]%f%n%F{#75b5aa}@%f%m %F{#6a9fb5}%(5~!.../!)%4~%f%k%(!.%F{214}%f.%F{#444444}%f) "
+ps1_set() {
+_ps_icon_os=$ps_icons[$os_id]
+[[ -z $_ps_icon_os ]] && _ps_icon_os=""
+_ps_color_os_fg=$ps_colors[$os_id]
+
+local icon
+[[ -z $_ps_color_os_fg ]] && icon=${_ps_icon_os}\
+|| icon="%F{$_ps_color_os_fg}${_ps_icon_os}%f"
+
 PS1=\
 "%B%(?..%F{red}%?%f)%b\
-%K{#444444}\
+%K{$_ps_color_bg}\
 %(2L.%B%F{202}Lv%L%f%b.)\
 %(1j.%B%F{207}J%j%f%b.)\
 %(2V.%F{195}[%*]%f.)\
-%n%F{#75b5aa}@%f%m \
-%F{#87cfff}%1v%f%k\
-%(!.%F{214}%f.%F{#444444}%f) "
+%n%F{#75b5aa}\
+%F{$_ps_color_host_bg}▐%f%K{$_ps_color_host_bg}${icon} %m%K{$_ps_color_bg}%F{$_ps_color_host_bg}▌\
+%F{$_ps_color_dir}%1v%f%k\
+%(!.%F{214}%f.%F{$_ps_color_bg}%f) "
+}
+ps1_set
 
-#autoload bashcompinit
-#bashcompinit
-#source /path/to/your/bash_completion_file
 
 # selectable menu for tab-completions
 zstyle ':completion:*' menu select
