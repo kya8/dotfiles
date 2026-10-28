@@ -40,9 +40,17 @@ autoload -Uz compinit
 #   ps1_ssh_indicator=""
 # fi
 
-ps_shorten_pwd () {
+ps_shorten_pwd() {
   local p=${(%):-%~}
   psvar[1]="${(@j[/]M)${(@s[/]M)p##*/}##(\~*|.|)?}$p:t"
+}
+
+ps_toggle_time() {
+  if [ -z "${psvar[2]}" ]; then
+    psvar[2]=1
+  else
+    psvar[2]=""
+  fi
 }
 
 autoload -Uz add-zsh-hook
@@ -53,7 +61,7 @@ PS1=\
 "%B%(?..%F{red}%?%f)%b\
 %K{#444444}\
 %(1j.%B%F{207}J%j%f%b.)\
-%F{195}[%*]%f\
+%(2V.%F{195}[%*]%f.)\
 %n\
 %F{#75b5aa}@%f%m \
 %F{#87cfff}%1v%f%k\
