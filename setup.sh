@@ -1,6 +1,16 @@
-#!/bin/sh
+#!/bin/zsh
 
-set -e
+# This script was originally written in strict POSIX sh and later switched to
+# zsh; however, the existing code was not immediately converted to idiomatic
+# zsh. For now, new or modified sections are written in zsh, though the
+# remaining portions are not being actively converted.
+
+if (( $zsh_eval_context[(I)file] )) ; then
+  echo >&2 "This script should not be sourced."
+  return 2
+fi
+
+set -eo pipefail
 
 csi=$(printf '\033[')
 # shellcheck disable=SC2034
@@ -176,15 +186,15 @@ my_link() {
   fi
 }
 
-supported_os="linux macos freebsd"
+supported_os=(linux macos freebsd)
 
 link_dir() {
-  for src in "$1"/*; do
-    [ -e "$src" ] || continue # Prevent unexpanded *
+  local src os
+  for src in "$1"/*(N); do
     pkg="${src##*/}"
     skip=0
     has_suffix=0
-    for os in ${supported_os}; do
+    for os in "${supported_os[@]}"; do
       pkg_name="${pkg%."${os}"}"
       if [ "$pkg_name" != "$pkg" ] ; then
         has_suffix=1

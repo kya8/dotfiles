@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "master" ]
     paths:
-      - "setup.sh"
+#     - "setup.sh"
       - "bin/*.sh"
 
   # Allows you to run this workflow manually from the Actions tab
@@ -24,5 +24,4 @@ jobs:
 
       - name: Check sh scripts
         run: |
-          ./shellcheck setup.sh
           ./shellcheck bin/*.sh
