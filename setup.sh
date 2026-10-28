@@ -2,37 +2,6 @@
 
 set -e
 
-os_type=$(uname -s)
-case "${os_type}" in
-  Linux*)
-    os_type=linux
-# shellcheck disable=SC1091
-{
-    [ -r "/etc/os-release" ] && . "/etc/os-release" \
-    && os_ver=${FANCY_NAME:-${PRETTY_NAME}}
-}
-    [ -z "$os_ver" ] && os_ver="Unknown version"
-    ;;
-  Darwin*)
-    os_type=macos
-    os_ver=$(sw_vers -productVersion) || os_ver="Unknown version"
-    ;;
-  FreeBSD)
-    os_type=freebsd
-    os_ver=$(freebsd-version) || os_ver="Unknown version"
-    ;;
-  #     CYGWIN_NT*)
-    #         os_type=cygwin
-    #         ;;
-  #     MINGW*)
-    #         os_type=mingw
-    #         ;;
-  *)
-    echo "Unsupported system: ${os_type}"
-    exit 1
-    ;;
-esac
-
 csi=$(printf '\033[')
 # shellcheck disable=SC2034
 if [ -t 1 ] ; then
@@ -65,6 +34,40 @@ if [ -t 1 ] ; then
   underline="${csi}4m"
   ubold="${csi}1;4m"
 fi
+
+# Check OS
+os_type=$(uname -s)
+case "${os_type}" in
+  Linux*)
+    os_type=linux
+# shellcheck disable=SC1091
+{
+    [ -r "/etc/os-release" ] && . "/etc/os-release" \
+    && os_ver=${FANCY_NAME:-${PRETTY_NAME}}
+}
+    [ -n "$ANSI_COLOR" ] && [ -t 1 ] && [ -n "$os_ver" ] \
+    && os_ver="${csi}${ANSI_COLOR}m${os_ver}${reset}"
+    [ -z "$os_ver" ] && os_ver="Unknown version"
+    ;;
+  Darwin*)
+    os_type=macos
+    os_ver=$(sw_vers -productVersion) || os_ver="Unknown version"
+    ;;
+  FreeBSD)
+    os_type=freebsd
+    os_ver=$(freebsd-version) || os_ver="Unknown version"
+    ;;
+  #     CYGWIN_NT*)
+    #         os_type=cygwin
+    #         ;;
+  #     MINGW*)
+    #         os_type=mingw
+    #         ;;
+  *)
+    echo "Unsupported system: ${os_type}"
+    exit 1
+    ;;
+esac
 
 force=0 # Overwrite existing symlinks
 check_sm=1
