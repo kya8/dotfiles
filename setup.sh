@@ -6,12 +6,20 @@ os_type=$(uname -s)
 case "${os_type}" in
   Linux*)
     os_type=linux
+# shellcheck disable=SC1091
+{
+    [ -r "/etc/os-release" ] && . "/etc/os-release"
+}
+    os_ver=${FANCY_NAME:-${PRETTY_NAME}}
+    [ -z "$os_ver" ] && os_ver="Unknown version"
     ;;
   Darwin*)
     os_type=macos
+    os_ver=$(sw_vers -productVersion) || os_ver="Unknown version"
     ;;
   FreeBSD)
     os_type=freebsd
+    os_ver=$(freebsd-version) || os_ver="Unknown version"
     ;;
   #     CYGWIN_NT*)
     #         os_type=cygwin
@@ -111,7 +119,7 @@ leader_run="${grayi}*** Dry run:${reset}"
 header="${grayi}Dry run:${reset} "
 fi
 
-echo "${leader} OS type: ${cyani}${os_type}${reset}"
+echo "${leader} OS type: ${cyani}${os_type}${reset} ${os_ver}"
 
 if has_cmd git ; then
   dotfiles=$(git -C "$(dirname -- "$0")" rev-parse --show-toplevel)
