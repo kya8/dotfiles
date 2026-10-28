@@ -3,7 +3,8 @@
 # In case I'm being sourced by a non-interactive shell
 [[ "$-" == *i* ]] || return 0
 
-readonly zsh_home=~/.dotfiles/zsh
+readonly dotfiles=~/.dotfiles
+readonly zsh_home=${dotfiles}/zsh
 
 # Custom functions
 typeset -gU fpath
@@ -40,6 +41,7 @@ autoload -Uz compinit
 #   ps1_ssh_indicator=""
 # fi
 
+
 ps_shorten_pwd() {
   local p=${(%):-%~}
   psvar[1]="${(@j[/]M)${(@s[/]M)p##*/}##(\~*|.|)?}$p:t"
@@ -60,10 +62,10 @@ add-zsh-hook precmd ps_shorten_pwd
 PS1=\
 "%B%(?..%F{red}%?%f)%b\
 %K{#444444}\
+%(2L.%B%F{202}Lv%L%f%b.)\
 %(1j.%B%F{207}J%j%f%b.)\
 %(2V.%F{195}[%*]%f.)\
-%n\
-%F{#75b5aa}@%f%m \
+%n%F{#75b5aa}@%f%m \
 %F{#87cfff}%1v%f%k\
 %(!.%F{214}%f.%F{#444444}%f) "
 
@@ -252,7 +254,7 @@ if [ -d "${_zsh_plugin_dir}/zsh-completions/src" ] ; then
 fi
 
 # Common defs used in sourced files
-source "${zsh_home}/utils.zsh"
+source "${zsh_home}/utils/utils.zsh"
 
 merge_source "${zsh_home}/rc.d" "${zsh_home}/rc.d.local"
 
