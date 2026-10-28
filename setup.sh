@@ -2,6 +2,29 @@
 
 set -e
 
+os_type=$(uname -s)
+case "${os_type}" in
+  Linux*)
+    os_type=linux
+    ;;
+  Darwin*)
+    os_type=macos
+    ;;
+  FreeBSD)
+    os_type=freebsd
+    ;;
+  #     CYGWIN_NT*)
+    #         os_type=cygwin
+    #         ;;
+  #     MINGW*)
+    #         os_type=mingw
+    #         ;;
+  *)
+    echo "Unsupported system: ${os_type}"
+    exit 1
+    ;;
+esac
+
 csi='['
 # shellcheck disable=SC2034
 if [ -t 1 ] ; then
@@ -35,7 +58,6 @@ if [ -t 1 ] ; then
   ubold="${csi}1;4m"
 fi
 
-os_type=$(uname -s)
 force=0 # Overwrite existing symlinks
 check_sm=1
 dry=0
@@ -88,28 +110,6 @@ else
 leader_run="${grayi}*** Dry run:${reset}"
 header="${grayi}Dry run:${reset} "
 fi
-
-case "${os_type}" in
-  Linux*)
-    os_type=linux
-    ;;
-  Darwin*)
-    os_type=macos
-    ;;
-  FreeBSD)
-    os_type=freebsd
-    ;;
-  #     CYGWIN_NT*)
-    #         os_type=cygwin
-    #         ;;
-  #     MINGW*)
-    #         os_type=mingw
-    #         ;;
-  *)
-    echo "Unknown OS"
-    exit 1
-    ;;
-esac
 
 echo "${leader} OS type: ${cyani}${os_type}${reset}"
 
