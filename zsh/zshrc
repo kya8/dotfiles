@@ -14,6 +14,8 @@ fpath+=("$my_fpath_local" "$my_fpath")
 
 autoload -Uz compinit
 
+# Common defs
+source "${zsh_home}/utils/utils.zsh"
 
 # --- Prompt config
 # psvar:
@@ -40,29 +42,29 @@ _local_cache_file="${dotfiles}/local/cache"
 [[ -r $_local_cache_file ]] && source "$_local_cache_file"
 
 _ps_color_dir="#87cfff"
+_ps_color_sep="#949494"
 # _ps_color_dir="#02afff" # default in p10k
+_ps_color_host_bg="#000000"
+_ps_color_user_bg="#303030"
 _ps_color_bg="#444444"
-_ps_color_host_bg="#292929"
 
-#PS1="%B%(?..%F{red}%?%f)%b%K{#444444}%(1j.%B%F{207}J%j%f%b.)%F{195}[%*]%f%n%F{#75b5aa}@%f%m %F{#6a9fb5}%(5~!.../!)%4~%f%k%(!.%F{214}%f.%F{#444444}%f) "
 ps1_set() {
-_ps_icon_os=$ps_icons[$os_id]
-[[ -z $_ps_icon_os ]] && _ps_icon_os=""
-_ps_color_os_fg=$ps_colors[$os_id]
-
+local _ps_color_host_bg=${ps_colors[${os_id}_bg]:-${_ps_color_host_bg}}
+local _ps_icon_os=${ps_icons[$os_id]:-""}
+local _ps_color_os_fg=$ps_colors[$os_id]
 local icon
 [[ -z $_ps_color_os_fg ]] && icon=${_ps_icon_os}\
 || icon="%F{$_ps_color_os_fg}${_ps_icon_os}%f"
 
 PS1=\
 "%B%(?..%F{red}%?%f)%b\
-%K{$_ps_color_bg}\
+%K{$_ps_color_host_bg}${icon} %m\
+%F{$_ps_color_host_bg}%K{$_ps_color_user_bg}%f\
 %(2L.%B%F{202}Lv%L%f%b.)\
 %(1j.%B%F{207}J%j%f%b.)\
 %(2V.%F{195}[%*]%f.)\
-%n%F{#75b5aa}\
-%F{$_ps_color_host_bg}▐%f%K{$_ps_color_host_bg}${icon} %m%K{$_ps_color_bg}%F{$_ps_color_host_bg}▌\
-%F{$_ps_color_dir}%1v%f%k\
+%n%F{$_ps_color_user_bg}%K{$_ps_color_bg}\
+%F{$_ps_color_dir}%1v%k\
 %(!.%F{214}%f.%F{$_ps_color_bg}%f) "
 }
 ps1_set
@@ -247,9 +249,6 @@ unset _zsh_autosuggestions_path
 if [ -d "${_zsh_plugin_dir}/zsh-completions/src" ] ; then
     fpath+="${_zsh_plugin_dir}/zsh-completions/src"
 fi
-
-# Common defs used in sourced files
-source "${zsh_home}/utils/utils.zsh"
 
 merge_source "${zsh_home}/rc.d" "${zsh_home}/rc.d.local"
 
