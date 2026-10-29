@@ -63,37 +63,6 @@ opt.foldenable = false
 
 opt.shell = "zsh"
 
-
--- Outside vscode-neovim
-if not vim.g.vscode then
-
--- Cosmetics
-opt.termguicolors = true
-opt.background = 'dark'
-
-vim.cmd.colorscheme('carbonfox')
-
--- highlight trailing whitespace
--- vim.api.nvim_set_hl(0, 'ExtraWhitespace', { bg = 'red' })
--- vim.api.nvim_create_autocmd({ "WinEnter", "VimEnter" }, {
---     group = vim.api.nvim_create_augroup('TrailingSpace', { clear = true }),
---     pattern = "*",
---     callback = function()
---         vim.fn.matchadd('ExtraWhitespace', [[\s\+\%#\@<!$]])
---     end,
--- })
-
-require('lualine').setup{
-    options = {
-        icons_enabled = false,
-    }
-}
-
-opt.scrolloff = 3
-opt.sidescrolloff = 8
-
-end -- not vscode
-
 -- Keymaps
 keymap.set('i', 'jk', '<Esc>')
 
@@ -107,3 +76,58 @@ keymap.set('n', 'Q', '<Nop>')
 
 keymap.set('n', '<leader>r', '<cmd>set rnu!<CR>')
 
+
+-- Outside vscode-neovim
+if not vim.g.vscode then
+
+-- Cosmetics
+opt.termguicolors = true
+opt.background = 'dark'
+
+vim.cmd.colorscheme('carbonfox')
+
+require('lualine').setup{
+    options = {
+        icons_enabled = false
+        -- ,section_separators = '',
+        -- component_separators = { left = '│', right = '│' }
+    }
+}
+
+opt.scrolloff = 3
+opt.sidescrolloff = 8
+
+opt.cursorline = true
+opt.cursorlineopt = "number"
+--[[
+vim.api.nvim_create_autocmd("InsertEnter", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.cursorlineopt = "number"
+  end,
+})
+vim.api.nvim_create_autocmd("InsertLeave", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.cursorlineopt = "both"
+  end,
+})
+
+keymap.set('n', '<leader>c', '<cmd>set cursorline!<CR>')
+--]]
+
+end -- Not vscode-neovim
+
+-- highlight yanked text
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = vim.api.nvim_create_augroup("HighlightYank", { clear = true }),
+  callback = function()
+    -- Use vim.highlight.on_yank() if on Neovim < 0.11
+    vim.hl.on_yank({
+      higroup = "IncSearch", -- Highlight group to use (default: "IncSearch")
+      timeout = 130,         -- Duration in milliseconds (default: 150)
+      on_visual = true,      -- Highlight when yanking from visual mode (default: true)
+      on_macro = false,      -- Highlight when executing macros (default: false)
+    })
+  end,
+})
