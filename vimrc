@@ -1,3 +1,5 @@
+" Not updated anymore. Use neovim instead.
+
 " vim-plug section
 call plug#begin('~/.vim/plugged')
 
