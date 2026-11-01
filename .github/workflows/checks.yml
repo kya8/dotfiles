@@ -25,3 +25,12 @@ jobs:
       - name: Check sh scripts
         run: |
           ./shellcheck bin/*.sh
+
+      - name: Test setup.sh
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends zsh
+          ./setup.sh -d
+          ./setup.sh
+          ./setup.sh -d -f
+          ./setup.sh -f
