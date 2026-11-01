@@ -4,4 +4,4 @@
 
 [ -z "$EDITOR" ] && export EDITOR=$VISUAL
 
-[ -z "$LESS" ] && export LESS="-i -R"
+[ -z "$LESS" ] && export LESS="-i -R -j 4"

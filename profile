@@ -12,7 +12,7 @@ fi
 export PATH
 
 # less
-export LESS="-i -R"
+export LESS="-i -R -j 4"
 
 export PAGER=less
 
