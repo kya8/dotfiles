@@ -86,14 +86,6 @@ opt.background = 'dark'
 
 vim.cmd.colorscheme('carbonfox')
 
-require('lualine').setup{
-    options = {
-        icons_enabled = false
-        -- ,section_separators = '',
-        -- component_separators = { left = '│', right = '│' }
-    }
-}
-
 opt.scrolloff = 3
 opt.sidescrolloff = 8
 
