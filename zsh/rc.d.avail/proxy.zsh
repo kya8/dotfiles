@@ -83,5 +83,10 @@ proxy_print() {
 
 [ -z "$all_proxy" ] && proxy_set ||:
 
+if has_cmd sudo ; then
+sudop() {
+  sudo --preserve-env=http_proxy,https_proxy,all_proxy "$@"
+}
+fi
 
 # vim: ft=zsh
