@@ -1,10 +1,11 @@
 # Nerd symbols
 
 typeset -A ps_icons ps_colors
-ps_icons[fedora]=''; ps_colors[fedora]="#51a2da"
-ps_icons[opensuse]=''; ps_colors[opensuse]="#73ba25"
+# fedora blues: #294172, #3c6eb4, #51a2da
+ps_icons[fedora]=''; ps_colors[fedora]="#3c6eb4"
+ps_icons[opensuse]=''; ps_colors[opensuse]="#3c6eb4"
 ps_icons[alpine]=''; ps_colors[alpine]="#0d597f"
-ps_icons[gentoo]=''
+ps_icons[gentoo]=''; ps_colors[gentoo_bg]="#54487A"
 ps_icons[ubuntu]=''; ps_colors[ubuntu]="#e95420"
 ps_icons[debian]=''
 ps_icons[arch]=''
