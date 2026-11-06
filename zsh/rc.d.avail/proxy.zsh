@@ -1,4 +1,5 @@
-typeset -gr _default_proxy="http://127.0.0.1:1080"
+typeset -gr _default_proxy_addr="127.0.0.1:1080"
+typeset -gr _default_proxy="http://${_default_proxy_addr}"
 
 proxy_set() {
     local _my_proxy
@@ -15,6 +16,7 @@ proxy_set() {
     fi
 
     export all_proxy="$_my_proxy" http_proxy="$_my_proxy" https_proxy="$_my_proxy"
+    socks_proxy="socks5://${_my_proxy#*://}"
     is_tin && echo "Proxy set to $_my_proxy"
 }
 
