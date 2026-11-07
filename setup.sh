@@ -50,34 +50,38 @@ os_type=$(uname -s)
 case "${os_type}" in
   Linux*)
     os_type=linux
-# shellcheck disable=SC1091
-{
-    [ -r "/etc/os-release" ] && . "/etc/os-release" \
-    && os_ver=${FANCY_NAME:-${PRETTY_NAME}}
-}
-    [ -n "$ANSI_COLOR" ] && [ -t 1 ] && [ -n "$os_ver" ] \
+    # shellcheck disable=SC1091
+    {
+      [ -r "/etc/os-release" ] && source "/etc/os-release" \
+        && os_ver=${FANCY_NAME:-${PRETTY_NAME}}
+    }
+  os_id="$ID"
+  [ -n "$ANSI_COLOR" ] && [ -t 1 ] && [ -n "$os_ver" ] \
     && os_ver="${csi}${ANSI_COLOR}m${os_ver}${reset}"
-    [ -z "$os_ver" ] && os_ver="Unknown version"
-    ;;
-  Darwin*)
-    os_type=macos
-    os_ver=$(sw_vers -productVersion) || os_ver="Unknown version"
-    ;;
-  FreeBSD)
-    os_type=freebsd
-    os_ver=$(freebsd-version) || os_ver="Unknown version"
-    ;;
-  #     CYGWIN_NT*)
-    #         os_type=cygwin
-    #         ;;
-  #     MINGW*)
-    #         os_type=mingw
-    #         ;;
-  *)
-    echo "Unsupported system: ${os_type}"
-    exit 1
-    ;;
+  [ -z "$os_ver" ] && os_ver="Unknown version"
+  ;;
+Darwin*)
+  os_type=macos
+  os_id=macos
+  os_ver=$(=sw_vers -productVersion) || os_ver="Unknown version"
+  ;;
+FreeBSD)
+  os_type=freebsd
+  os_id=freebsd
+  os_ver=$(freebsd-version) || os_ver="Unknown version"
+  ;;
+#     CYGWIN_NT*)
+  #         os_type=cygwin
+  #         ;;
+#     MINGW*)
+  #         os_type=mingw
+  #         ;;
+*)
+  echo "Unsupported system: ${os_type}"
+  exit 1
+  ;;
 esac
+os_arch=$(uname -m)
 
 force=0 # Overwrite existing symlinks
 check_sm=1
@@ -127,10 +131,10 @@ done
 
 leader="${grayi}---${reset}"
 if [ "${dry}" = 0 ]; then
-leader_run="$leader"
+  leader_run="$leader"
 else
-leader_run="${grayi}*** Dry run:${reset}"
-header="${grayi}Dry run:${reset} "
+  leader_run="${grayi}*** Dry run:${reset}"
+  header="${grayi}Dry run:${reset} "
 fi
 
 echo "${leader} OS type: ${cyani}${os_type}${reset} ${os_ver}"
@@ -179,7 +183,7 @@ my_link() {
       echo "${header}${green}Linking${reset} ${magentai}$2${default} -> ${color}$1${reset}"
     fi
     if [ "$dry" = 0 ]; then
-      ln -sfn "$1" "$2"
+      =ln -sfn "$1" "$2"
       # `-n' is not standard, but supported on GNU and BSD variants of ln
     else
       return 0
@@ -221,10 +225,17 @@ my_link "${dotfiles}/zsh/zshrc" "${HOME}/.zshrc"
 my_link "${dotfiles}/vimrc" "${HOME}/.vimrc"
 
 config_dir=${XDG_CONFIG_HOME:-${HOME}/.config}
-mkdir -p "$config_dir"
-echo "${leader_run} Linking configs in ${ubold}${config_dir}${reset}..."
+=mkdir -p "$config_dir"
+echo "${leader_run} Linking configs in ${ubold}${blue}${config_dir}${reset}..."
 config_src=${dotfiles}/config
 [ -d "${config_src}" ] && link_dir "$config_src" "$config_dir"
 
+source "${dotfiles}/utils/update_cache.zsh"
+cache="${dotfiles}/local/cache"
+echo "${leader_run} Updating local cache file ${ubold}${cache}${reset}..."
+typeset -a cache_vars=(os_type os_id os_arch)
+[ "$dry" = 0 ] && update_cache "$cache" "${cache_vars[@]}"
 
-echo "${leader} ${defaulti}Setup done!${reset}"
+echo "${leader} ${greeni}Setup done!${reset}"
+
+# vim: ft=zsh
