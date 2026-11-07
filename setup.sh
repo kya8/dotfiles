@@ -84,8 +84,9 @@ check_sm=1
 dry=0
 verbosity=0
 
+typeset -r base_name="${0##*/}"
 usage() {
-  echo "${ubold}Usage:${reset} ${bold}${0##*/}${reset} [OPTIONS]"
+  echo "${ubold}Usage:${reset} ${bold}${base_name}${reset} [OPTIONS]"
   echo
   echo "${ubold}Options:${reset}"
   echo "  ${bold}-f, --force${reset}            Force overwrite symlinks"
