@@ -7,7 +7,7 @@ Project-specific requirements always take precedence.
 * Prefer asking the user over deciding unilaterally, for anything uncertain.
 * Keep the host system and user's home (i.e. things outside the project dir)
   clean. Ask the user first if you believe it is necessary to mutate persistent
-  states outside the project scope.
+  states outside the project scope. Explicit requests are an exception.
 * Focus on correstness, simplicity, clarity and current best practices.
 * Only make edits when explicitly asked to.
 * Separate git commits logically, instead of stuffing everything into one.
