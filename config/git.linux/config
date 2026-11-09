@@ -4,7 +4,7 @@
 	helper = libsecret
 
 [include]
-        path = ~/.dotfiles/local/git
+    path = config.local
 
 
 # vim: ft=gitconfig
