@@ -87,6 +87,7 @@ force=0 # Overwrite existing symlinks
 check_sm=1
 dry=0
 verbosity=0
+cache_only=0
 
 typeset -r base_name="${0##*/}"
 usage() {
@@ -95,6 +96,7 @@ usage() {
   echo "${ubold}Options:${reset}"
   echo "  ${bold}-f, --force${reset}            Force overwrite symlinks"
   echo "  ${bold}-s, --skip-submodules${reset}  Skip checking submodules"
+  echo "  ${bold}-c, --cache${reset}            Update cache only"
   echo "  ${bold}-d, --dry-run${reset}          Only show what would be done"
   echo "  ${bold}-h, --help${reset}             Show this help message"
 }
@@ -111,6 +113,8 @@ while [ $# -gt 0 ]; do
       check_sm=0 ;;
     -d|--dry-run)
       dry=1 ;;
+    -c|--cache)
+      cache_only=1 ;;
     -v)
       verbosity=$(( verbosity + 1)) ;;
     -h|--help)
@@ -146,6 +150,28 @@ else
 fi
 
 echo "${leader} Using dotfiles repo: ${yg}${ubold}${dotfiles}${reset}"
+
+do_cache_update() {
+  local -r cache="${dotfiles}/local/cache"
+  echo "${leader_run} Updating local cache file ${ubold}${cache}${reset}..."
+  if [ "$dry" = 0 ]; then
+    local -a cache_vars=(os_type os_id os_arch)
+    # Additional cache vars. We might want to move these into modules
+    if has_cmd go ; then
+      local -r gopath="$(go env GOPATH)"
+      local -r gobin="$(go env GOBIN)"
+      cache_vars+=(gopath gobin)
+    fi
+    #
+    source "${dotfiles}/utils/update_cache.zsh"
+    update_cache "$cache" "${cache_vars[@]}" && echo "${leader} Cache file updated"
+  fi
+}
+
+if [[ $cache_only == 1 ]]; then
+  do_cache_update
+  exit
+fi
 
 if [ "$check_sm" = 1 ]; then
   if has_cmd git ; then
@@ -230,11 +256,7 @@ echo "${leader_run} Linking configs in ${ubold}${blue}${config_dir}${reset}..."
 config_src=${dotfiles}/config
 [ -d "${config_src}" ] && link_dir "$config_src" "$config_dir"
 
-source "${dotfiles}/utils/update_cache.zsh"
-cache="${dotfiles}/local/cache"
-echo "${leader_run} Updating local cache file ${ubold}${cache}${reset}..."
-typeset -a cache_vars=(os_type os_id os_arch)
-[ "$dry" = 0 ] && update_cache "$cache" "${cache_vars[@]}"
+do_cache_update
 
 echo "${leader} ${greeni}Setup done!${reset}"
 

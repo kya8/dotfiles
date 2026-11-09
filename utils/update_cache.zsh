@@ -1,3 +1,6 @@
+[[ -n ${_UTIL_UPDATE_CACHE_SOURCED:-} ]] && return
+typeset -g _UTIL_UPDATE_CACHE_SOURCED=1
+
 update_cache() (
   emulate -L zsh
   setopt extendedglob
