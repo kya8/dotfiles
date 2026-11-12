@@ -38,7 +38,7 @@ C++ guidelines that are applicable to C shall also apply here.
 
 * Be explicit about lifetimes and ownership. E.g.: Is this pointer in a struct
   managing a resource owned by the struct, which will be reponsible for cleaning
-  it, or a non-owning reference? Write it out.
+  it, or a non-owning reference? Write it down.
 
 ### Python
 
