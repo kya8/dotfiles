@@ -31,9 +31,17 @@ opt.smartcase = true
 opt.wrapscan = false
 
 -- opt.clipboard = 'unnamedplus'
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]], { desc = "Yank to system clipboard" })
-vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank line to system clipboard" })
-vim.keymap.set({"n", "v"}, "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
+vim.api.nvim_create_autocmd("TextYankPost", {
+    group = vim.api.nvim_create_augroup("YankToSystemClipboard", { clear = true }),
+    callback = function()
+        local ev = vim.v.event
+        if ev.operator == "y" and ev.regname == "" then
+            vim.fn.setreg("+", ev.regcontents, ev.regtype)
+        end
+    end,
+})
+vim.keymap.set({ "n", "x" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+vim.keymap.set({ "n", "x" }, "<leader>P", '"+P', { desc = "Paste before from system clipboard" })
 
 opt.splitbelow = true
 
