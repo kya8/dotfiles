@@ -1,0 +1,15 @@
+set send_charset="utf-8"
+set assumed_charset="iso-8859-1"
+set menu_scroll=yes
+set editor="nvim -c 'set syntax=mail ft=mail enc=utf-8'"
+set sort=threads
+set strict_threads=yes
+set sort_aux=last-date-received
+
+set read_inc = 1
+set time_inc = 300
+
+set mbox_type=Maildir
+set folder="~/.maildir"
+set spoolfile="~/.maildir"
+mailboxes "~/.maildir/"
