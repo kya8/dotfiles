@@ -23,7 +23,8 @@ else
 fi
 export EDITOR=$VISUAL
 
-export MAIL=${HOME}/.maildir
+export MAIL="${HOME}/.maildir"
+export MBOX=$MAIL
 
 # Linux-specifics
 if [[ "$OSTYPE" == linux* ]]; then
