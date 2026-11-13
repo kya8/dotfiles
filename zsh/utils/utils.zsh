@@ -66,9 +66,12 @@ merge_source() {
     fi
 
     local -a files
+    local f
     while (( $# )); do
         if [[ -d $1 ]]; then
-            files+=( "$1"/*(N) )
+          for f in "$1"/*(N) ; do
+            [[ -f $f ]] && files+="$f"
+          done
         elif [[ -f $1 ]]; then
             files+="$1"
         else
@@ -84,7 +87,6 @@ merge_source() {
     files=( "${(@)${(@o)${(@)files/(#m)*/${MATCH:t}$nul$MATCH}}#*$nul}" )
     debug_print -l "Files to source (in order):" "${files[@]}"
 
-    local f
     for f in "${files[@]}" ; do
         source "$f"
     done
