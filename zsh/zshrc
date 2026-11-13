@@ -72,10 +72,12 @@ unsetopt AUTO_NAME_DIRS
 #setopt CDABLE_VARS
 
 ## automatically decide when to page a list of completions
-#LISTMAX=0
+# LISTMAX=0
 
-## disable mail checking
-#MAILCHECK=0
+MAILCHECK=60
+MAIL="${HOME}/.maildir"
+mailpath=("${HOME}/.maildir?You have new mail!")
+# setopt MAIL_WARNING
 
 # autoload -U colors
 #colors

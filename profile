@@ -23,6 +23,8 @@ else
 fi
 export EDITOR=$VISUAL
 
+export MAIL=${HOME}/.maildir
+
 # Linux-specifics
 if [[ "$OSTYPE" == linux* ]]; then
     export WINEDLLOVERRIDES=winemenubuilder.exe=d
