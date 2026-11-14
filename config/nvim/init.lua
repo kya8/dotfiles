@@ -1,6 +1,6 @@
 -- init.lua
 
-vim.g.mapleader = "\\"
+vim.g.mapleader = " "
 
 -- lazy.nvim
 require("config.lazy")
@@ -40,8 +40,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         end
     end,
 })
-vim.keymap.set({ "n", "x" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
-vim.keymap.set({ "n", "x" }, "<leader>P", '"+P', { desc = "Paste before from system clipboard" })
+vim.keymap.set({ "n", "x" }, "<leader>p", '"0p', { desc = "Paste last explicit yank" })
+vim.keymap.set({ "n", "x" }, "<leader>P", '"0P', { desc = "Paste last explicit yank before" })
 
 opt.splitbelow = true
 
@@ -72,9 +72,10 @@ opt.foldenable = false
 opt.shell = "zsh"
 
 -- Keymaps
+keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 keymap.set('i', 'jk', '<Esc>')
 
-keymap.set('n', '<leader>\\', '<cmd>nohl<CR>')
+keymap.set('n', '\\\\', '<cmd>nohl<CR>')
 keymap.set('n', '<leader>w', '<cmd>set wrap!<CR>')
 
 -- keymap.set('n', '<leader>p', '<cmd>set paste!<CR>')
