@@ -28,6 +28,7 @@
     d  = diff
     ds = diff --staged
     sm = submodule
+    rv = rev-parse
 
 [log]
     date = iso
