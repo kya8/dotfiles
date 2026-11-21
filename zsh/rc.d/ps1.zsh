@@ -28,7 +28,7 @@ PS1=\
 "%B%(?..%F{red}%?%f)%b\
 %K{$_ps_color_host_bg}${icon} ${_ps_hostname-%m}\
 %F{$_ps_color_host_bg}%K{$_ps_color_user_bg}%f\
-%(2L.%B%F{202}Lv%L%f%b.)\
+${_ps_show_shlvl:+%(2L.%B%F{202\}L%L%f%b.)}\
 %(1j.%B%F{207}J%j%f%b.)\
 %n%F{$_ps_color_user_bg}%K{$_ps_color_bg}\
 %F{$_ps_color_dir}%1v%k\
