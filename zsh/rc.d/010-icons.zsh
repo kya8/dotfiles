@@ -1,6 +1,6 @@
 # Nerd symbols
 
-typeset -A ps_icons ps_colors
+typeset -Ag ps_icons ps_colors
 # fedora blues: #294172, #3c6eb4, #51a2da
 ps_icons[fedora]=''; ps_colors[fedora]="#3c6eb4"
 ps_icons[opensuse]=''; ps_colors[opensuse]="#3c6eb4"
