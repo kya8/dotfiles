@@ -4,8 +4,7 @@ on:
   push:
     branches: [ "master" ]
     paths:
-#     - "setup.sh"
-      - "bin/*.sh"
+      - "**.sh"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,7 +23,8 @@ jobs:
 
       - name: Check sh scripts
         run: |
-          ./shellcheck bin/*.sh
+            export PATH="$(pwd)":$PATH
+            ./check_scripts.sh
 
       - name: Test setup.sh
         run: |
