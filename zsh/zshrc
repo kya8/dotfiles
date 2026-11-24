@@ -6,6 +6,8 @@
 readonly dotfiles=~/.dotfiles
 readonly zsh_home=${dotfiles}/zsh
 
+typeset -U path PATH
+
 # Custom functions
 typeset -gU fpath
 readonly my_fpath="${zsh_home}/functions"
