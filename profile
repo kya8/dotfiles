@@ -31,9 +31,9 @@ if [[ "$OSTYPE" == linux* ]]; then
     export WINEDLLOVERRIDES=winemenubuilder.exe=d
 fi
 
-# Use C locale for sorting and datetime
 export LC_TIME=C.UTF-8
 export LC_COLLATE=C.UTF-8
+export LC_MEASUREMENT=C.UTF-8 #WTF is 100 Fahrenheit?!
 
 else
     echo "Warning: I'm being sourced by a non-login or unsupported shell. Skipping." >&2

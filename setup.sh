@@ -97,7 +97,7 @@ usage() {
   echo "  ${bold}-f, --force${reset}            Force overwrite symlinks"
   echo "  ${bold}-s, --skip-submodules${reset}  Skip checking submodules"
   echo "  ${bold}-c, --cache${reset}            Update cache only"
-  echo "  ${bold}-d, --dry-run${reset}          Only show what would be done"
+  echo "  ${bold}-n, --dry-run${reset}          Only show what would be done"
   echo "  ${bold}-h, --help${reset}             Show this help message"
 }
 
@@ -111,7 +111,7 @@ while [ $# -gt 0 ]; do
       force=1 ;;
     -s|--skip-submodules)
       check_sm=0 ;;
-    -d|--dry-run)
+    -n|--dry-run)
       dry=1 ;;
     -c|--cache)
       cache_only=1 ;;
