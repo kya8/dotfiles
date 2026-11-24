@@ -30,7 +30,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends zsh
-          ./setup.sh -d
+          ./setup.sh --dry-run
           ./setup.sh
-          ./setup.sh -d -f
-          ./setup.sh -f
+          ./setup.sh --dry-run --force
+          ./setup.sh --force
