@@ -1,6 +1,6 @@
 [user]
-	name = kya
-	email = <>
+	name  = kya
+	email = kyadev@outlook.com
 [credential "https://github.com"]
 	username = kya8
 
@@ -17,7 +17,7 @@
     cma = commit --amend
     sw = switch
     rb = rebase
-    re = reset
+    #re = reset
     rs = restore
     mg = merge
     fe = fetch
@@ -29,6 +29,7 @@
     ds = diff --staged
     sm = submodule
     rv = rev-parse
+    wt = worktree
 
 [log]
     date = iso
@@ -37,7 +38,7 @@
 	autoSquash = true
 
 [status]
-        showStash = true
+    showStash = true
      ; relativePaths = false
 
 # vim: ft=gitconfig
