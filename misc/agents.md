@@ -1,6 +1,7 @@
 This document provide guidelines for AI coding agents.
 
-Project-specific requirements or explicit requests always take precedence.
+Project-specific requirements or explicit requests shall take precedence if
+and only if they conflict with this document.
 
 # General
 
@@ -21,7 +22,7 @@ Project-specific requirements or explicit requests always take precedence.
 
 * Write clean, modern C++. Prefer standard, portable solutions.
 * Adhere to the C++ Core Guidelines when appropriate.
-* Write generic, composable code, but there is no need to be overly generic.
+* Write generic, composable code. Avoid verbose / noisy code.
 * Ownership and lifetimes should be carefully considered and designed.
   Make use of RAII.
 * Be explicit about contracts: preconditions, postconditions, etc.
