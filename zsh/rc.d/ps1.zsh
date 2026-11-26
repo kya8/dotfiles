@@ -1,13 +1,15 @@
 # --- Prompt config
-# psvar:
-#  1. shortened cwd
+
 ps_shorten_pwd() {
   local p=${(%):-%~}
-  psvar[1]="${(@j[/]M)${(@s[/]M)p##*/}##(\~*|.|)?}$p:t"
+  local -a d=("${(@s[/])${p#/}}")
+  d[2,-2]=("${(@M)d[2,-2]##(.|)?}")
+  psvar[1]="${(M)p#/}${(j[/])d}"
 }
 
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd ps_shorten_pwd
+add-zsh-hook chpwd ps_shorten_pwd
+ps_shorten_pwd
 
 _ps_color_dir="#87cfff"
 _ps_color_sep="#949494"

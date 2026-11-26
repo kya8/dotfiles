@@ -39,6 +39,7 @@ EOF
   if [ "$mtime_before" != "$mtime_after" ] ; then
     source -- "$f"
     echo "Changes were saved. File has been re-sourced."
+    ps_shorten_pwd
   else
     echo "No changes were made."
   fi
