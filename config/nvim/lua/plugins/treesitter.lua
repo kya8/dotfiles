@@ -14,7 +14,8 @@ return {
                 'c', 'cpp', 'cmake', 'rust',
                 'lua', 'python', 'bash', 'zsh',
                 'json', 'yaml', 'toml', 'html', 'css',
-                'markdown', 'markdown_inline',
+                'markdown', 'markdown_inline', 'typst',
+                'comment'
             })
 
             vim.api.nvim_create_autocmd("FileType", {
