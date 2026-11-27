@@ -13,6 +13,7 @@
     a  = add
     sh = show
     br = branch
+    b  = branch
     cm = commit
     cma = commit --amend
     sw = switch
@@ -30,6 +31,9 @@
     sm = submodule
     rv = rev-parse
     wt = worktree
+
+[core]
+    pager = less -FRX
 
 [log]
     date = iso
